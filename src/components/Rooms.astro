@@ -1,0 +1,71 @@
+---
+import RoomCard from './RoomCard.astro';
+
+const rooms = [
+  {
+    name: 'La Cabane de Léo',
+    slug: 'cabane-leo',
+    capacity: '2 personnes',
+    description: "Un lieu à part — une petite maison chaleureuse, posée dans un coin du domaine. Une cabane pour ralentir, respirer, retrouver ce plaisir simple d'ouvrir une porte en bois et de sentir que l'on entre dans un monde à soi : intime, doux, un peu magique.",
+    features: ['Spa nordique privatif', 'Bain nordique de 17h à 23h', 'Salle de bain privative', 'Petit-déjeuner inclus'],
+    price: '225 €',
+    badge: 'Coup de coeur',
+    featured: true,
+  },
+  {
+    name: 'Une Nuit Insolite',
+    slug: 'nuit-insolite',
+    capacity: '2 personnes',
+    description: "Un refuge doux et atypique, pensé pour ceux qui cherchent une échappée hors du rythme quotidien — un cocon pour rêver autrement.",
+    features: ['Salon privatif', 'Salle de bain rétro', 'Spa privatif', 'Sauna infrarouge', '2 sièges massant'],
+  },
+  {
+    name: 'La Suite Nordique',
+    slug: 'suite-nordique',
+    capacity: '2 personnes',
+    description: "Chambre en mezzanine avec lit double 160, coin salon-cuisine, entrée privative et petite terrasse. Un espace pensé pour le bien-être avec spa nordique privatif.",
+    features: ['Mezzanine — Lit 160', 'Salon & cuisine privés', 'Spa nordique privatif 3 pers.', '2 sièges massant', 'Terrasse privée'],
+  },
+  {
+    name: 'Larguez les Amarres',
+    slug: 'larguez-amarres',
+    capacity: "Jusqu'à 5 personnes",
+    description: "L'âme d'un petit bateau amarré au calme du domaine : bois blond, détails marins, esprit cabine. Pensée pour les familles, les fratries, les tribus de passage. 3 espaces lits qui rappellent les couchages malins des bateaux.",
+    features: ['Idéale familles', '3 espaces couchage', 'Esprit cabine marine', 'Coin cabine cosy'],
+  },
+  {
+    name: "Les Chambres d'Hôtes",
+    slug: 'chambres-hotes',
+    capacity: '2 personnes',
+    description: "Des cocons chaleureux, simples, enveloppants, chacun avec son âme propre. Le matin, les paniers se remplissent de produits locaux, de préparations maison, parfois du jardin selon la saison.",
+    features: ['Labellisées Gîtes de France', 'Petit-déjeuner maison', 'Salle de bain privée', 'Vue sur le jardin', 'WiFi gratuit'],
+  },
+];
+---
+
+<section class="section hebergements" id="hebergements">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__label">Séjours insolites</span>
+      <h2 class="section__title">Nos hébergements</h2>
+      <p class="section__intro">Le domaine abrite 5 chambres d'hôtes labellisées Gîtes de France. Chacune propose une ambiance unique, entre confort, nature et esprit maison de famille.</p>
+    </div>
+    <div class="rooms">
+      {rooms.map(room => (
+        <RoomCard {...room} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hebergements { background: var(--c-bg-warm); }
+  .rooms {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: var(--space-lg);
+  }
+  @media (max-width: 768px) {
+    .rooms { grid-template-columns: 1fr; }
+  }
+</style>

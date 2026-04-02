@@ -1,0 +1,99 @@
+<section class="section tarifs" id="tarifs">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__label">Pratique</span>
+      <h2 class="section__title">Options & suppléments</h2>
+    </div>
+
+    <div class="tarifs__grid">
+      <div class="tarif-card">
+        <div class="tarif-card__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h4>Panier pique-nique</h4>
+        <p>À partir de <strong>15 € / pers.</strong></p>
+      </div>
+      <div class="tarif-card">
+        <div class="tarif-card__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h4>Panier repas</h4>
+        <p>À partir de <strong>25 € / pers.</strong></p>
+      </div>
+      <div class="tarif-card">
+        <div class="tarif-card__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 22h8"/><path d="M12 11v11"/><path d="M17 5c0 1.66-2.24 3-5 3S7 6.66 7 5 9.24 2 12 2s5 1.34 5 3z"/></svg>
+        </div>
+        <h4>Champagne</h4>
+        <p>À partir de <strong>25 € / bouteille</strong></p>
+      </div>
+      <div class="tarif-card">
+        <div class="tarif-card__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h4>Départ tardif (17h)</h4>
+        <p>À partir de <strong>90 €</strong></p>
+      </div>
+      <div class="tarif-card">
+        <div class="tarif-card__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><polyline points="15 17.5 15 6 5 8 5 17.5"/><path d="M5 8L15 6"/></svg>
+        </div>
+        <h4>Location de vélos</h4>
+        <p><strong>10 € / 3h</strong> par personne<br />2 VTT + 2 VTC disponibles</p>
+      </div>
+      <div class="tarif-card">
+        <div class="tarif-card__icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/></svg>
+        </div>
+        <h4>Bon cadeau</h4>
+        <p>Offrez un séjour ou<br />une journée découverte</p>
+      </div>
+    </div>
+
+    <div class="tarifs__note">
+      <p><strong>Borne de recharge électrique</strong> disponible sur le domaine.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tarifs { background: var(--c-bg-warm); }
+  .tarifs__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-md);
+  }
+  .tarif-card {
+    background: var(--c-white);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg) var(--space-md);
+    text-align: center;
+    transition: var(--transition);
+  }
+  .tarif-card:hover { box-shadow: var(--shadow-md); }
+  .tarif-card__icon {
+    color: var(--c-accent);
+    margin-bottom: var(--space-sm);
+  }
+  .tarif-card h4 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-md);
+    font-weight: 500;
+    margin-bottom: var(--space-xs);
+  }
+  .tarif-card p {
+    font-size: var(--fs-sm);
+    color: var(--c-text-light);
+  }
+  .tarifs__note {
+    margin-top: var(--space-lg);
+    text-align: center;
+    padding: var(--space-md);
+    background: var(--c-green-light);
+    border-radius: var(--radius-md);
+  }
+  .tarifs__note p { color: var(--c-green); font-size: var(--fs-sm); }
+  @media (max-width: 480px) {
+    .tarifs__grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>

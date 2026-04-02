@@ -1,0 +1,161 @@
+---
+const links = [
+  { href: '#domaine', label: 'Le Domaine' },
+  { href: '#hebergements', label: 'Hébergements' },
+  { href: '#spa', label: 'Bien-être' },
+  { href: '#atelier', label: 'Atelier & Galerie' },
+  { href: '#stages', label: 'Stages' },
+  { href: '#tarifs', label: 'Tarifs' },
+];
+---
+
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav__logo">La Cage aux Oiseaux</a>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav__links" id="navLinks">
+    {links.map(link => (
+      <li><a href={link.href}>{link.label}</a></li>
+    ))}
+    <li><a href="#contact" class="nav__cta">Réserver</a></li>
+  </ul>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    transition: var(--transition);
+  }
+  .nav--scrolled {
+    background: rgba(250, 248, 245, .95);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-sm) var(--space-lg);
+  }
+  .nav__logo {
+    font-family: var(--ff-display);
+    font-size: var(--fs-lg);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--c-white);
+    transition: var(--transition);
+  }
+  .nav--scrolled .nav__logo { color: var(--c-text); }
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+  .nav__links a {
+    font-size: var(--fs-sm);
+    font-weight: 400;
+    color: rgba(255,255,255,.85);
+    transition: var(--transition);
+    position: relative;
+  }
+  .nav--scrolled .nav__links a { color: var(--c-text); }
+  .nav__links a:hover { color: var(--c-accent-light); }
+  .nav--scrolled .nav__links a:hover { color: var(--c-accent); }
+  .nav__links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--c-accent-light);
+    transition: var(--transition);
+  }
+  .nav__links a:hover::after { width: 100%; }
+  .nav__cta {
+    padding: 0.5em 1.2em;
+    border: 1.5px solid rgba(255,255,255,.4);
+    border-radius: var(--radius-sm);
+  }
+  .nav--scrolled .nav__cta {
+    border-color: var(--c-accent);
+    color: var(--c-accent) !important;
+  }
+  .nav__cta:hover {
+    background: var(--c-accent) !important;
+    color: var(--c-white) !important;
+    border-color: var(--c-accent) !important;
+  }
+  .nav__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav__toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--c-white);
+    transition: var(--transition);
+    border-radius: 1px;
+  }
+  .nav--scrolled .nav__toggle span { background: var(--c-text); }
+
+  @media (max-width: 768px) {
+    .nav__toggle { display: flex; }
+    .nav__links {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 280px;
+      height: 100vh;
+      background: var(--c-bg);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 5rem var(--space-lg) var(--space-lg);
+      gap: var(--space-md);
+      transform: translateX(100%);
+      transition: var(--transition);
+      box-shadow: var(--shadow-lg);
+    }
+    .nav__links--open { transform: translateX(0); }
+    .nav__links a { color: var(--c-text) !important; font-size: var(--fs-base); }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('nav')!;
+  const navToggle = document.getElementById('navToggle')!;
+  const navLinks = document.getElementById('navLinks')!;
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('nav__links--open');
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('nav__links--open');
+    });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const target = document.querySelector((anchor as HTMLAnchorElement).getAttribute('href')!);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>

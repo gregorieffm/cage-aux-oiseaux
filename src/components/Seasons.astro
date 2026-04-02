@@ -1,0 +1,47 @@
+---
+const seasons = [
+  { label: 'Printemps', title: 'Printemps lumineux' },
+  { label: 'Été', title: "Soirées d'été douces" },
+  { label: 'Automne', title: 'Automne doré' },
+  { label: 'Hiver', title: 'Hivers réconfortants' },
+];
+---
+
+<section class="seasons">
+  <div class="seasons__track">
+    {seasons.map(s => (
+      <div class="season">
+        <div class="img-placeholder img-placeholder--square" data-label={s.label}></div>
+        <h4>{s.title}</h4>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .seasons {
+    padding: var(--space-xl) 0;
+    background: var(--c-bg-warm);
+    overflow-x: auto;
+  }
+  .seasons__track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+  .season { text-align: center; }
+  .season h4 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-md);
+    font-weight: 400;
+    font-style: italic;
+    margin-top: var(--space-sm);
+    color: var(--c-text-light);
+  }
+  @media (max-width: 768px) {
+    .seasons__track { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

@@ -1,0 +1,48 @@
+<section class="section location">
+  <div class="container">
+    <div class="split">
+      <div class="split__text">
+        <span class="section__label">Nous trouver</span>
+        <h2 class="section__title">Au coeur<br />de la Normandie</h2>
+        <address>
+          <strong>Domaine La Cage aux Oiseaux</strong><br />
+          La Perdrière<br />
+          61320 La Lande-de-Goult<br />
+          Orne, Normandie
+        </address>
+        <ul class="location__nearby">
+          <li>Parc Naturel Régional Normandie-Maine — 10 km</li>
+          <li>Château de Carrouges — 11 km</li>
+          <li>Golf de Bagnoles-de-l'Orne — 26 km</li>
+          <li>Aéroport de Caen-Carpiquet — 80 km</li>
+        </ul>
+      </div>
+      <div class="split__media">
+        <div class="map-placeholder">
+          <div class="map-placeholder__pin">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <p>La Lande-de-Goult, Orne</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .location { background: var(--c-bg-warm); }
+  .location address {
+    font-size: var(--fs-md);
+    line-height: 1.8;
+    color: var(--c-text-light);
+    margin-bottom: var(--space-md);
+  }
+  .location__nearby { margin-top: var(--space-sm); }
+  .location__nearby li {
+    font-size: var(--fs-sm);
+    color: var(--c-text-light);
+    padding: 0.4em 0;
+    border-bottom: 1px solid var(--c-cream);
+  }
+  .location__nearby li:last-child { border: none; }
+</style>

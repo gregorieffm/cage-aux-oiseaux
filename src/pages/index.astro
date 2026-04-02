@@ -1,17 +1,85 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Domaine from '../components/Domaine.astro';
+import Seasons from '../components/Seasons.astro';
+import Rooms from '../components/Rooms.astro';
+import Spa from '../components/Spa.astro';
+import Atelier from '../components/Atelier.astro';
+import Stages from '../components/Stages.astro';
+import Tarifs from '../components/Tarifs.astro';
+import Reviews from '../components/Reviews.astro';
+import Location from '../components/Location.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <Nav />
+  <Hero />
+  <Domaine />
+  <Seasons />
+  <Rooms />
+  <Spa />
+  <Atelier />
+  <Stages />
+  <Tarifs />
+  <Reviews />
+  <Location />
+  <Contact />
+  <Footer />
+</Layout>
+
+<script>
+  const revealElements = () => {
+    const elements = document.querySelectorAll(
+      '.section__header, .split__text, .split__media, .room-card, ' +
+      '.spa__option, .atelier__item, .stage-card, .tarif-card, ' +
+      '.review, .form, .map-placeholder, .season'
+    );
+
+    elements.forEach(el => {
+      if (!el.classList.contains('reveal')) {
+        el.classList.add('reveal');
+      }
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal--visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    elements.forEach(el => observer.observe(el));
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealElements);
+  } else {
+    revealElements();
+  }
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinkItems = document.querySelectorAll('.nav__links a[href^="#"]');
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY + 120;
+    sections.forEach(section => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      const id = section.getAttribute('id');
+      if (scrollY >= top && scrollY < top + height) {
+        navLinkItems.forEach(link => {
+          (link as HTMLElement).style.opacity = link.getAttribute('href') === `#${id}` ? '1' : '';
+        });
+      }
+    });
+  }, { passive: true });
+</script>

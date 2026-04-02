@@ -1,0 +1,85 @@
+<section class="section atelier" id="atelier">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__label">Art & Terre</span>
+      <h2 class="section__title">L'Atelier & la Galerie</h2>
+      <p class="section__intro">La galerie du domaine présente les créations en grès, terre cuite et sculptures de Coco Eugène Lacroix. Un espace où la terre raconte des histoires, avec des pièces façonnées à la main — bols, sculptures, formes organiques inspirées de la nature.</p>
+    </div>
+
+    <div class="atelier__grid">
+      <div class="atelier__item">
+        <div class="img-placeholder img-placeholder--square" data-label="Sculptures en grès"></div>
+      </div>
+      <div class="atelier__item">
+        <div class="img-placeholder img-placeholder--square" data-label="Bols & céramiques"></div>
+      </div>
+      <div class="atelier__item atelier__item--text">
+        <h3>Un lieu vivant</h3>
+        <p>La galerie est ouverte sur rendez-vous, pour prendre le temps d'échanger, de comprendre la démarche et de toucher la terre. Ce n'est pas une boutique classique : c'est un lieu vivant, chaleureux, où la création se dévoile simplement.</p>
+        <p>Il est possible d'acheter une pièce sur place, ou d'offrir un bon cadeau pour une journée découverte.</p>
+      </div>
+      <div class="atelier__item">
+        <div class="img-placeholder img-placeholder--square" data-label="Déco de jardin"></div>
+      </div>
+      <div class="atelier__item">
+        <div class="img-placeholder img-placeholder--square" data-label="L'atelier"></div>
+      </div>
+    </div>
+
+    <div class="atelier__deco">
+      <h3>Décoration de jardin</h3>
+      <p>Pommes et boules en grès et porcelaine à suspendre dans les arbres — <strong>de 25 à 45 €</strong></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .atelier { background: var(--c-bg-warm); }
+  .atelier__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+  .atelier__item--text {
+    background: var(--c-white);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .atelier__item--text h3 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    font-weight: 400;
+    margin-bottom: var(--space-sm);
+  }
+  .atelier__item--text p {
+    font-size: var(--fs-sm);
+    color: var(--c-text-light);
+    margin-bottom: var(--space-xs);
+  }
+  .atelier__deco {
+    text-align: center;
+    padding: var(--space-lg);
+    background: var(--c-white);
+    border-radius: var(--radius-md);
+  }
+  .atelier__deco h3 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-lg);
+    font-weight: 400;
+    margin-bottom: var(--space-xs);
+  }
+  .atelier__deco p {
+    color: var(--c-text-light);
+    font-size: var(--fs-sm);
+  }
+  @media (max-width: 1024px) {
+    .atelier__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .atelier__grid { grid-template-columns: 1fr; }
+  }
+</style>

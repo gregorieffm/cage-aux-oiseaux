@@ -1,0 +1,56 @@
+<section class="section spa" id="spa">
+  <div class="container">
+    <div class="split">
+      <div class="split__text">
+        <span class="section__label">Bien-être</span>
+        <h2 class="section__title">Spa privatif &<br />bains nordiques</h2>
+        <p>Pour prolonger la parenthèse, le domaine propose des espaces bien-être privatifs : bains nordiques chauffés au feu de bois, jacuzzi extérieur ouvert toute l'année, sauna privatif et sièges massant.</p>
+        <p>Un rituel simple : l'eau chaude, le ciel, le silence.</p>
+        <div class="spa__options">
+          <div class="spa__option">
+            <h4>Bain nordique privatif</h4>
+            <p>Chauffé au poêle à bois, de 17h à 23h.<br /><strong>45 € / jour</strong> (min. 2 nuits)</p>
+          </div>
+          <div class="spa__option">
+            <h4>Sauna privatif</h4>
+            <p>Accès illimité au sauna chauffé au poêle à bois, de 17h à 23h.<br /><strong>40 € / séance</strong></p>
+          </div>
+          <div class="spa__option">
+            <h4>Jacuzzi extérieur</h4>
+            <p>Ouvert toute l'année, sous les étoiles.</p>
+          </div>
+        </div>
+      </div>
+      <div class="split__media">
+        <div class="img-placeholder img-placeholder--tall" data-label="Bain nordique"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .spa { background: var(--c-bg); }
+  .spa__options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+  .spa__option {
+    padding: var(--space-md);
+    background: var(--c-bg-warm);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--c-accent);
+  }
+  .spa__option h4 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-md);
+    font-weight: 500;
+    margin-bottom: 0.3em;
+  }
+  .spa__option p {
+    font-size: var(--fs-sm);
+    color: var(--c-text-light);
+    margin: 0 !important;
+  }
+</style>

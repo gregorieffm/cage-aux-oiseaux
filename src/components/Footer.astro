@@ -1,0 +1,98 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__col">
+        <h4>La Cage aux Oiseaux</h4>
+        <p>Un lieu vivant, sensible, façonné par la nature et par l'univers artistique de Coco Eugène Lacroix.</p>
+        <div class="footer__social">
+          <a href="https://www.facebook.com/lacageauxoiseaux.fr/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#domaine">Le Domaine</a></li>
+          <li><a href="#hebergements">Hébergements</a></li>
+          <li><a href="#spa">Bien-être</a></li>
+          <li><a href="#atelier">Atelier & Galerie</a></li>
+          <li><a href="#stages">Stages céramique</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <p>
+          La Perdrière<br />
+          61320 La Lande-de-Goult<br />
+          Orne, Normandie
+        </p>
+      </div>
+      <div class="footer__col">
+        <h4>Partenaires</h4>
+        <ul>
+          <li>Gîtes de France — 4 épis</li>
+          <li>Cabanes de France</li>
+          <li>Abracadaroom</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; 2026 Domaine La Cage aux Oiseaux — Coco Eugène Lacroix. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--c-bg-dark);
+    color: rgba(255,255,255,.7);
+    padding: var(--space-2xl) 0 var(--space-lg);
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+  .footer h4 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-lg);
+    font-weight: 400;
+    color: var(--c-white);
+    margin-bottom: var(--space-md);
+  }
+  .footer p, .footer li { font-size: var(--fs-sm); line-height: 1.8; }
+  .footer a:hover { color: var(--c-accent-light); }
+  .footer__social {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+  .footer__social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50%;
+    transition: var(--transition);
+  }
+  .footer__social a:hover {
+    background: var(--c-accent);
+    border-color: var(--c-accent);
+  }
+  .footer__bottom {
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255,255,255,.1);
+    text-align: center;
+  }
+  .footer__bottom p { font-size: var(--fs-xs); }
+  @media (max-width: 1024px) {
+    .footer__grid { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+  }
+  @media (max-width: 768px) {
+    .footer__grid { grid-template-columns: 1fr; }
+  }
+</style>

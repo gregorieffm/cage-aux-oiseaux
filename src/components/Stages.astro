@@ -1,0 +1,72 @@
+<section class="section stages" id="stages">
+  <div class="container">
+    <div class="split split--reverse">
+      <div class="split__media">
+        <div class="img-placeholder img-placeholder--tall" data-label="Stage céramique"></div>
+      </div>
+      <div class="split__text">
+        <span class="section__label">Expériences</span>
+        <h2 class="section__title">Stages de<br />céramique</h2>
+        <p>Des stages pour débutants et confirmés, pour découvrir le travail de la terre dans un cadre inspirant. Le matin, on aborde la technique du colombin, de la plaque, du bol. L'après-midi amène vers des créations plus personnalisées.</p>
+
+        <div class="stages__cards">
+          <div class="stage-card">
+            <h4>Journée complète</h4>
+            <p>10h — 17h</p>
+            <span class="stage-card__price">80 €</span>
+            <small>Terre & cuisson comprises</small>
+          </div>
+          <div class="stage-card">
+            <h4>Demi-journée</h4>
+            <p>10h — 13h</p>
+            <span class="stage-card__price">50 €</span>
+            <small>Terre & cuisson comprises</small>
+          </div>
+        </div>
+
+        <a href="#contact" class="btn btn--outline">Réserver un stage</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stages { background: var(--c-bg); }
+  .stages__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+  .stage-card {
+    background: var(--c-bg-warm);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    text-align: center;
+  }
+  .stage-card h4 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-md);
+    font-weight: 500;
+    margin-bottom: 0.2em;
+  }
+  .stage-card p {
+    font-size: var(--fs-sm);
+    color: var(--c-text-light);
+    margin-bottom: var(--space-xs) !important;
+  }
+  .stage-card__price {
+    display: block;
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    color: var(--c-accent);
+    margin-bottom: 0.1em;
+  }
+  .stage-card small {
+    font-size: var(--fs-xs);
+    color: var(--c-text-light);
+  }
+  @media (max-width: 768px) {
+    .stages__cards { grid-template-columns: 1fr; }
+  }
+</style>

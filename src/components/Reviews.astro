@@ -1,0 +1,72 @@
+---
+const reviews = [
+  {
+    text: "Un lieu magique, hors du temps. On a tout aimé : la cabane, le bain nordique, le petit-déjeuner avec les produits du jardin. Coco est d'une gentillesse rare.",
+    author: 'Un voyageur TripAdvisor',
+  },
+  {
+    text: "Un vrai cocon au milieu de la nature. La chambre était parfaite, l'atelier de céramique une belle découverte. On reviendra, c'est certain !",
+    author: 'Un voyageur TripAdvisor',
+  },
+  {
+    text: "Parfait pour une escapade en famille. Les enfants ont adoré la chambre Larguez les Amarres, et nous le spa privatif. Un endroit unique en Normandie.",
+    author: 'Un voyageur TripAdvisor',
+  },
+];
+---
+
+<section class="section reviews">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__label">Ils témoignent</span>
+      <h2 class="section__title">Ce que nos hôtes en disent</h2>
+      <p class="section__intro">#1 des chambres d'hôtes à La Lande-de-Goult sur TripAdvisor — Note de 5/5</p>
+    </div>
+    <div class="reviews__grid">
+      {reviews.map(r => (
+        <blockquote class="review">
+          <div class="review__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>&laquo; {r.text} &raquo;</p>
+          <cite>— {r.author}</cite>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews { background: var(--c-bg); }
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+  }
+  .review {
+    background: var(--c-white);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .review__stars {
+    color: var(--c-accent-light);
+    font-size: var(--fs-md);
+    margin-bottom: var(--space-sm);
+    letter-spacing: 2px;
+  }
+  .review p {
+    font-family: var(--ff-display);
+    font-size: var(--fs-md);
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--c-text);
+    margin-bottom: var(--space-sm);
+  }
+  .review cite {
+    font-style: normal;
+    font-size: var(--fs-sm);
+    color: var(--c-text-light);
+  }
+  @media (max-width: 768px) {
+    .reviews__grid { grid-template-columns: 1fr; }
+  }
+</style>

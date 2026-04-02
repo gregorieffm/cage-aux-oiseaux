@@ -1,0 +1,126 @@
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__label">Contact</span>
+      <h2 class="section__title">Réserver votre séjour</h2>
+      <p class="section__intro">Pour toute demande de réservation ou d'information, n'hésitez pas à nous écrire. Nous vous répondrons avec plaisir.</p>
+    </div>
+
+    <form class="form" id="contactForm">
+      <div class="form__row">
+        <div class="form__group">
+          <label for="name">Nom</label>
+          <input type="text" id="name" name="name" required placeholder="Votre nom" />
+        </div>
+        <div class="form__group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="votre@email.com" />
+        </div>
+      </div>
+      <div class="form__row">
+        <div class="form__group">
+          <label for="phone">Téléphone</label>
+          <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78" />
+        </div>
+        <div class="form__group">
+          <label for="dates">Dates souhaitées</label>
+          <input type="text" id="dates" name="dates" placeholder="ex: 15-17 juin 2026" />
+        </div>
+      </div>
+      <div class="form__group">
+        <label for="hebergement">Hébergement</label>
+        <select id="hebergement" name="hebergement">
+          <option value="">— Choisir un hébergement —</option>
+          <option value="cabane-leo">La Cabane de Léo</option>
+          <option value="nuit-insolite">Une Nuit Insolite</option>
+          <option value="suite-nordique">La Suite Nordique</option>
+          <option value="larguez-amarres">Larguez les Amarres</option>
+          <option value="chambres">Chambres d'hôtes</option>
+          <option value="stage">Stage céramique</option>
+          <option value="autre">Autre demande</option>
+        </select>
+      </div>
+      <div class="form__group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Parlez-nous de votre projet de séjour..."></textarea>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full">Envoyer ma demande</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact { background: var(--c-bg); }
+  .form {
+    max-width: 680px;
+    margin: 0 auto;
+    background: var(--c-white);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+  .form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+  .form__group {
+    margin-bottom: var(--space-md);
+  }
+  .form__group label {
+    display: block;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--c-text);
+    margin-bottom: 0.4em;
+  }
+  .form__group input,
+  .form__group select,
+  .form__group textarea {
+    width: 100%;
+    padding: 0.8em 1em;
+    font-family: var(--ff-body);
+    font-size: var(--fs-base);
+    color: var(--c-text);
+    background: var(--c-bg);
+    border: 1.5px solid var(--c-cream);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    outline: none;
+  }
+  .form__group input:focus,
+  .form__group select:focus,
+  .form__group textarea:focus {
+    border-color: var(--c-accent);
+    box-shadow: 0 0 0 3px rgba(139,111,78,.1);
+  }
+  .form__group textarea { resize: vertical; }
+  @media (max-width: 768px) {
+    .form__row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalText = btn.textContent;
+    btn.textContent = 'Envoi en cours...';
+    btn.disabled = true;
+
+    // TODO: Replace with real API call
+    setTimeout(() => {
+      btn.textContent = 'Message envoyé !';
+      btn.style.background = '#6b7f5e';
+      btn.style.borderColor = '#6b7f5e';
+      setTimeout(() => {
+        form.reset();
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.disabled = false;
+      }, 3000);
+    }, 1200);
+  });
+</script>
