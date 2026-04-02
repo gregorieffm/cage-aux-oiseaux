@@ -1,7 +1,9 @@
 import type { APIRoute } from 'astro';
 
+const isLocal = import.meta.env.DEV;
+
 const cmsConfig = {
-  local_backend: true,
+  local_backend: isLocal,
   backend: { name: 'github', repo: 'gregorieffm/cage-aux-oiseaux', branch: 'main' },
   media_folder: 'public/images',
   public_folder: '/images',
