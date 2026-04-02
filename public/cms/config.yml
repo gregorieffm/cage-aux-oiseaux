@@ -146,23 +146,7 @@ collections:
         widget: list
         field: { label: Feature, name: feature, widget: string }
       - { label: "Prix affiché", name: price, widget: string, required: false }
-      - { label: "Note tarifaire", name: priceNote, widget: string, required: false }
       - { label: Photo, name: image, widget: image, required: false }
-      - label: "Flux iCal"
-        name: icalFeeds
-        widget: list
-        fields:
-          - { label: Plateforme, name: platform, widget: string }
-          - { label: "URL iCal", name: url, widget: string }
-      - label: "Tarifs saisonniers"
-        name: seasonalPricing
-        widget: list
-        fields:
-          - { label: Saison, name: label, widget: string }
-          - { label: "Mois début (1-12)", name: startMonth, widget: number, value_type: int, min: 1, max: 12 }
-          - { label: "Mois fin (1-12)", name: endMonth, widget: number, value_type: int, min: 1, max: 12 }
-          - { label: "Prix / nuit (€)", name: pricePerNight, widget: number, value_type: int }
-          - { label: "Nuits minimum", name: minNights, widget: number, value_type: int, default: 1 }
 
   - name: extras
     label: "Options & Extras"
