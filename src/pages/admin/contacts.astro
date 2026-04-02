@@ -1,0 +1,74 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { supabaseAdmin } from '../../lib/supabase';
+
+const { data: contacts } = await supabaseAdmin!
+  .from('contact_submissions')
+  .select('*')
+  .order('created_at', { ascending: false });
+
+function formatDateTime(d: string) {
+  return new Date(d).toLocaleString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+---
+
+<AdminLayout title="Messages" activeNav="contacts">
+  <div class="card">
+    {contacts && contacts.length > 0 ? (
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Téléphone</th>
+              <th>Dates souhaitées</th>
+              <th>Hébergement</th>
+              <th>Message</th>
+              <th>Reçu le</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {contacts.map(c => (
+              <tr style={!c.read ? 'background:#fffbf0' : ''}>
+                <td>{!c.read ? <span class="badge badge--pending" style="font-size:9px">Nouveau</span> : ''}</td>
+                <td style="font-weight:500">{c.name}</td>
+                <td><a href={`mailto:${c.email}`} style="color:var(--admin-primary)">{c.email}</a></td>
+                <td>{c.phone || '—'}</td>
+                <td>{c.dates || '—'}</td>
+                <td>{c.property_slug || '—'}</td>
+                <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis">{c.message || '—'}</td>
+                <td style="font-size:12px;color:var(--admin-text-light)">{formatDateTime(c.created_at)}</td>
+                <td>
+                  {!c.read && (
+                    <button class="btn-admin btn-admin--sm mark-read" data-id={c.id}>Lu</button>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      <div class="empty-state">
+        <p>Aucun message reçu.</p>
+      </div>
+    )}
+  </div>
+</AdminLayout>
+
+<script>
+  document.querySelectorAll('.mark-read').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = (btn as HTMLElement).dataset.id;
+      const res = await fetch('/api/admin/contacts', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, read: true }),
+      });
+      if (res.ok) window.location.reload();
+    });
+  });
+</script>

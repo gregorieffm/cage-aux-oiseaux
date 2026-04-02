@@ -1,0 +1,110 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { supabaseAdmin } from '../../../lib/supabase';
+
+const statusFilter = Astro.url.searchParams.get('status') || 'all';
+
+let query = supabaseAdmin!
+  .from('bookings')
+  .select('id, guest_name, guest_email, guest_phone, check_in, check_out, total_cents, status, created_at, properties(name)')
+  .order('created_at', { ascending: false });
+
+if (statusFilter !== 'all') {
+  query = query.eq('status', statusFilter);
+}
+
+const { data: bookings } = await query;
+
+function formatDate(d: string) {
+  return new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+const statuses = ['all', 'pending', 'confirmed', 'paid', 'cancelled', 'completed'];
+const statusLabels: Record<string, string> = {
+  all: 'Toutes',
+  pending: 'En attente',
+  confirmed: 'Confirmées',
+  paid: 'Payées',
+  cancelled: 'Annulées',
+  completed: 'Terminées',
+};
+---
+
+<AdminLayout title="Réservations" activeNav="bookings">
+  <div class="filters">
+    {statuses.map(s => (
+      <a
+        href={s === 'all' ? '/admin/bookings' : `/admin/bookings?status=${s}`}
+        class:list={['filter-tab', { 'filter-tab--active': statusFilter === s }]}
+      >
+        {statusLabels[s]}
+      </a>
+    ))}
+  </div>
+
+  <div class="card">
+    {bookings && bookings.length > 0 ? (
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Hébergement</th>
+              <th>Arrivée</th>
+              <th>Départ</th>
+              <th>Total</th>
+              <th>Statut</th>
+              <th>Créée le</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map(b => (
+              <tr>
+                <td>
+                  <div style="font-weight:500">{b.guest_name}</div>
+                  <div style="font-size:12px;color:var(--admin-text-light)">{b.guest_email}</div>
+                </td>
+                <td>{(b.properties as any)?.name || '—'}</td>
+                <td>{formatDate(b.check_in)}</td>
+                <td>{formatDate(b.check_out)}</td>
+                <td style="font-weight:600">{(b.total_cents / 100).toFixed(0)} €</td>
+                <td><span class={`badge badge--${b.status}`}>{b.status}</span></td>
+                <td style="font-size:12px;color:var(--admin-text-light)">{formatDate(b.created_at)}</td>
+                <td><a href={`/admin/bookings/${b.id}`} class="btn-admin btn-admin--sm">Détails</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      <div class="empty-state">
+        <p>Aucune réservation {statusFilter !== 'all' ? `avec le statut "${statusLabels[statusFilter]}"` : ''}.</p>
+      </div>
+    )}
+  </div>
+</AdminLayout>
+
+<style>
+  .filters {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .filter-tab {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid var(--admin-border);
+    background: var(--admin-white);
+    transition: all .15s;
+  }
+  .filter-tab:hover { background: var(--admin-bg); }
+  .filter-tab--active {
+    background: var(--admin-primary);
+    color: white;
+    border-color: var(--admin-primary);
+  }
+</style>

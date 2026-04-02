@@ -1,0 +1,285 @@
+---
+interface Props {
+  title: string;
+  activeNav?: string;
+}
+
+const { title, activeNav = '' } = Astro.props;
+
+const navItems = [
+  { href: '/admin', label: 'Tableau de bord', id: 'dashboard' },
+  { href: '/admin/bookings', label: 'Réservations', id: 'bookings' },
+  { href: '/admin/calendar', label: 'Calendrier', id: 'calendar' },
+  { href: '/admin/properties', label: 'Hébergements', id: 'properties' },
+  { href: '/admin/contacts', label: 'Messages', id: 'contacts' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{title} — Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="admin">
+    <aside class="admin__sidebar">
+      <div class="admin__logo">
+        <a href="/admin">La Cage aux Oiseaux</a>
+      </div>
+      <nav class="admin__nav">
+        {navItems.map(item => (
+          <a
+            href={item.href}
+            class:list={['admin__nav-item', { 'admin__nav-item--active': activeNav === item.id }]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+      <div class="admin__sidebar-footer">
+        <a href="/" class="admin__nav-item admin__nav-item--back">Voir le site</a>
+      </div>
+    </aside>
+
+    <main class="admin__main">
+      <header class="admin__header">
+        <h1 class="admin__title">{title}</h1>
+      </header>
+      <div class="admin__content">
+        <slot />
+      </div>
+    </main>
+  </div>
+</body>
+</html>
+
+<style is:global>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --admin-sidebar: 240px;
+    --admin-bg: #f8f9fa;
+    --admin-white: #ffffff;
+    --admin-border: #e9ecef;
+    --admin-text: #212529;
+    --admin-text-light: #6c757d;
+    --admin-primary: #8b6f4e;
+    --admin-primary-light: #f5f0ea;
+    --admin-success: #198754;
+    --admin-success-light: #d1e7dd;
+    --admin-warning: #fd7e14;
+    --admin-warning-light: #fff3cd;
+    --admin-danger: #dc3545;
+    --admin-danger-light: #f8d7da;
+    --admin-info: #0d6efd;
+    --admin-info-light: #cfe2ff;
+    --admin-radius: 8px;
+    --admin-shadow: 0 1px 3px rgba(0,0,0,.08);
+  }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 14px;
+    color: var(--admin-text);
+    background: var(--admin-bg);
+    line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .admin {
+    display: grid;
+    grid-template-columns: var(--admin-sidebar) 1fr;
+    min-height: 100vh;
+  }
+  .admin__sidebar {
+    background: var(--admin-white);
+    border-right: 1px solid var(--admin-border);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--admin-sidebar);
+    height: 100vh;
+    z-index: 100;
+  }
+  .admin__logo {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--admin-border);
+  }
+  .admin__logo a {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--admin-primary);
+  }
+  .admin__nav {
+    padding: 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .admin__nav-item {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--admin-text-light);
+    transition: all .15s;
+  }
+  .admin__nav-item:hover {
+    background: var(--admin-bg);
+    color: var(--admin-text);
+  }
+  .admin__nav-item--active {
+    background: var(--admin-primary-light);
+    color: var(--admin-primary);
+  }
+  .admin__sidebar-footer {
+    padding: 12px;
+    border-top: 1px solid var(--admin-border);
+  }
+  .admin__nav-item--back { font-size: 12px; }
+
+  .admin__main {
+    margin-left: var(--admin-sidebar);
+    min-height: 100vh;
+  }
+  .admin__header {
+    background: var(--admin-white);
+    border-bottom: 1px solid var(--admin-border);
+    padding: 20px 32px;
+  }
+  .admin__title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .admin__content {
+    padding: 24px 32px;
+  }
+
+  /* Shared admin components */
+  .card {
+    background: var(--admin-white);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    box-shadow: var(--admin-shadow);
+  }
+  .card__header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--admin-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card__title { font-size: 14px; font-weight: 600; }
+  .card__body { padding: 20px; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+  .badge--paid { background: var(--admin-success-light); color: var(--admin-success); }
+  .badge--confirmed { background: var(--admin-info-light); color: var(--admin-info); }
+  .badge--pending { background: var(--admin-warning-light); color: var(--admin-warning); }
+  .badge--cancelled { background: var(--admin-danger-light); color: var(--admin-danger); }
+  .badge--completed { background: var(--admin-success-light); color: var(--admin-success); }
+
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--admin-border);
+    white-space: nowrap;
+  }
+  th {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--admin-text-light);
+    background: var(--admin-bg);
+  }
+  tr:hover td { background: #f8f9fa; }
+
+  .btn-admin {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid var(--admin-border);
+    border-radius: 6px;
+    background: var(--admin-white);
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+    color: var(--admin-text);
+  }
+  .btn-admin:hover { background: var(--admin-bg); }
+  .btn-admin--primary {
+    background: var(--admin-primary);
+    color: white;
+    border-color: var(--admin-primary);
+  }
+  .btn-admin--primary:hover { opacity: .9; background: var(--admin-primary); }
+  .btn-admin--danger {
+    color: var(--admin-danger);
+    border-color: var(--admin-danger-light);
+  }
+  .btn-admin--danger:hover { background: var(--admin-danger-light); }
+  .btn-admin--sm { padding: 5px 10px; font-size: 12px; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--admin-white);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    padding: 20px;
+    box-shadow: var(--admin-shadow);
+  }
+  .stat-card__label {
+    font-size: 12px;
+    color: var(--admin-text-light);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 8px;
+  }
+  .stat-card__value {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .stat-card__sub {
+    font-size: 12px;
+    color: var(--admin-text-light);
+    margin-top: 4px;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--admin-text-light);
+  }
+  .empty-state p { font-size: 14px; }
+</style>

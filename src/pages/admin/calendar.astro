@@ -1,0 +1,176 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { supabaseAdmin } from '../../lib/supabase';
+
+const { data: properties } = await supabaseAdmin!
+  .from('properties')
+  .select('id, name, slug')
+  .eq('active', true)
+  .order('name');
+---
+
+<AdminLayout title="Calendrier" activeNav="calendar">
+  <div class="calendar-controls">
+    <button class="btn-admin" id="prevMonth">&larr; Mois précédent</button>
+    <span class="calendar-month-label" id="monthLabel"></span>
+    <button class="btn-admin" id="nextMonth">Mois suivant &rarr;</button>
+  </div>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table class="calendar-table" id="calendarTable">
+        <thead id="calendarHead"></thead>
+        <tbody id="calendarBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="calendar-legend">
+    <span><span class="dot dot--booked"></span> Réservé (site)</span>
+    <span><span class="dot dot--blocked"></span> Bloqué (OTA/manuel)</span>
+    <span><span class="dot dot--free"></span> Disponible</span>
+  </div>
+</AdminLayout>
+
+<style>
+  .calendar-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .calendar-month-label {
+    font-size: 16px;
+    font-weight: 600;
+    min-width: 180px;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .calendar-table th,
+  .calendar-table td {
+    text-align: center;
+    padding: 6px 2px;
+    min-width: 34px;
+    font-size: 12px;
+  }
+  .calendar-table td { cursor: default; }
+  .calendar-table th:first-child,
+  .calendar-table td:first-child {
+    text-align: left;
+    padding-left: 16px;
+    font-weight: 600;
+    min-width: 160px;
+    white-space: nowrap;
+  }
+  .cal-cell {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .cal-cell--free { background: #e8f5e9; color: #2e7d32; }
+  .cal-cell--booked { background: var(--admin-primary-light); color: var(--admin-primary); font-weight: 700; }
+  .cal-cell--blocked { background: var(--admin-danger-light); color: var(--admin-danger); }
+  .cal-cell--past { opacity: 0.3; }
+
+  .calendar-legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--admin-text-light);
+    justify-content: center;
+  }
+  .calendar-legend span { display: flex; align-items: center; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 3px; }
+  .dot--booked { background: var(--admin-primary-light); border: 1px solid var(--admin-primary); }
+  .dot--blocked { background: var(--admin-danger-light); border: 1px solid var(--admin-danger); }
+  .dot--free { background: #e8f5e9; border: 1px solid #2e7d32; }
+</style>
+
+<script define:vars={{ properties }}>
+  const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+
+  const monthLabel = document.getElementById('monthLabel');
+  const calendarHead = document.getElementById('calendarHead');
+  const calendarBody = document.getElementById('calendarBody');
+
+  async function fetchCalendarData(year, month) {
+    const from = `${year}-${String(month + 1).padStart(2, '0')}-01`;
+    const lastDay = new Date(year, month + 1, 0).getDate();
+    const to = `${year}-${String(month + 1).padStart(2, '0')}-${lastDay}`;
+
+    const results = {};
+    await Promise.all(
+      properties.map(async (prop) => {
+        const res = await fetch(`/api/availability?property=${prop.id}&from=${from}&to=${to}`);
+        const data = await res.json();
+        results[prop.id] = {};
+        if (data.dates) {
+          data.dates.forEach(d => { results[prop.id][d.date] = d; });
+        }
+      })
+    );
+    return results;
+  }
+
+  async function renderCalendar() {
+    monthLabel.textContent = `${MONTHS_FR[currentMonth]} ${currentYear}`;
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const today = new Date().toISOString().split('T')[0];
+
+    const data = await fetchCalendarData(currentYear, currentMonth);
+
+    let headHtml = '<tr><th>Hébergement</th>';
+    for (let d = 1; d <= daysInMonth; d++) {
+      headHtml += `<th>${d}</th>`;
+    }
+    headHtml += '</tr>';
+    calendarHead.innerHTML = headHtml;
+
+    let bodyHtml = '';
+    for (const prop of properties) {
+      bodyHtml += `<tr><td>${prop.name}</td>`;
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const info = data[prop.id]?.[dateStr];
+        const isPast = dateStr < today;
+        let cls = 'cal-cell';
+
+        if (isPast) {
+          cls += ' cal-cell--past';
+        }
+
+        if (info && !info.available) {
+          cls += ' cal-cell--blocked';
+        } else {
+          cls += ' cal-cell--free';
+        }
+
+        bodyHtml += `<td><span class="${cls}">${d}</span></td>`;
+      }
+      bodyHtml += '</tr>';
+    }
+    calendarBody.innerHTML = bodyHtml;
+  }
+
+  document.getElementById('prevMonth').addEventListener('click', () => {
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderCalendar();
+  });
+  document.getElementById('nextMonth').addEventListener('click', () => {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    renderCalendar();
+  });
+
+  renderCalendar();
+</script>

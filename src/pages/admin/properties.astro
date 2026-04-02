@@ -1,0 +1,90 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { supabaseAdmin } from '../../lib/supabase';
+
+const { data: properties } = await supabaseAdmin!
+  .from('properties')
+  .select('*, seasonal_pricing(*), ical_feeds(*)')
+  .order('name');
+---
+
+<AdminLayout title="Hébergements" activeNav="properties">
+  {properties && properties.map(prop => (
+    <div class="card" style="margin-bottom:20px">
+      <div class="card__header">
+        <span class="card__title">{prop.name}</span>
+        <span class={`badge ${prop.active ? 'badge--paid' : 'badge--cancelled'}`}>
+          {prop.active ? 'Actif' : 'Inactif'}
+        </span>
+      </div>
+      <div class="card__body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div>
+            <div class="prop-info">
+              <span class="prop-label">Slug</span>
+              <code style="font-size:12px">{prop.slug}</code>
+            </div>
+            <div class="prop-info">
+              <span class="prop-label">Capacité</span>
+              <span>{prop.capacity} pers.</span>
+            </div>
+            <div class="prop-info">
+              <span class="prop-label">Prix de base</span>
+              <span>{(prop.base_price_cents / 100).toFixed(0)} € / nuit</span>
+            </div>
+            <div class="prop-info">
+              <span class="prop-label">Min. nuits</span>
+              <span>{prop.min_nights}</span>
+            </div>
+          </div>
+          <div>
+            <div class="prop-label" style="margin-bottom:8px">Tarifs saisonniers</div>
+            {prop.seasonal_pricing && prop.seasonal_pricing.length > 0 ? (
+              <div style="display:flex;flex-direction:column;gap:4px">
+                {(prop.seasonal_pricing as any[]).map(sp => (
+                  <div style="font-size:12px;display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--admin-border)">
+                    <span>{sp.label} (mois {sp.start_month}→{sp.end_month})</span>
+                    <span style="font-weight:600">{(sp.price_per_night_cents / 100).toFixed(0)} €</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <span style="font-size:12px;color:var(--admin-text-light)">Aucun tarif saisonnier</span>
+            )}
+
+            <div class="prop-label" style="margin-top:16px;margin-bottom:8px">Flux iCal</div>
+            {prop.ical_feeds && (prop.ical_feeds as any[]).length > 0 ? (
+              <div style="display:flex;flex-direction:column;gap:4px">
+                {(prop.ical_feeds as any[]).map(feed => (
+                  <div style="font-size:12px;display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--admin-border)">
+                    <span>{feed.platform} {feed.active ? '' : '(désactivé)'}</span>
+                    <span style="color:var(--admin-text-light)">{feed.last_synced_at ? `Sync: ${new Date(feed.last_synced_at).toLocaleDateString('fr-FR')}` : 'Jamais sync'}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <span style="font-size:12px;color:var(--admin-text-light)">Aucun flux configuré</span>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</AdminLayout>
+
+<style>
+  .prop-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+    border-bottom: 1px solid var(--admin-border);
+  }
+  .prop-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--admin-text-light);
+    font-weight: 600;
+  }
+</style>
