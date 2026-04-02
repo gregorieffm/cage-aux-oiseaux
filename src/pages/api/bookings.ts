@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { supabaseAdmin } from '../../lib/supabase';
 import { calculateBookingPrice, getBlockedDates, getBookedDates } from '../../lib/availability';
 import { createCheckoutSession } from '../../lib/checkout';
+import { sendBookingPending, sendAdminNotification } from '../../lib/email';
 
 export const POST: APIRoute = async ({ request }) => {
   if (!supabaseAdmin) {
@@ -92,6 +93,24 @@ export const POST: APIRoute = async ({ request }) => {
       .single();
 
     if (bookingError) throw bookingError;
+
+    const emailData = {
+      guestName,
+      guestEmail,
+      propertyName: property.name,
+      checkIn,
+      checkOut,
+      nights: pricing.nights,
+      totalCents: pricing.totalCents,
+      bookingId: booking.id,
+    };
+
+    sendBookingPending(emailData).catch(console.error);
+
+    const adminEmail = import.meta.env.ADMIN_EMAIL || '';
+    if (adminEmail) {
+      sendAdminNotification(emailData, adminEmail).catch(console.error);
+    }
 
     const checkoutUrl = await createCheckoutSession({
       bookingId: booking.id,

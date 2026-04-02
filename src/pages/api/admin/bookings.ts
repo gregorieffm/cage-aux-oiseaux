@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { supabaseAdmin } from '../../../lib/supabase';
+import { sendBookingConfirmation, sendBookingCancellation } from '../../../lib/email';
 
 export const PATCH: APIRoute = async ({ request }) => {
   if (!supabaseAdmin) {
@@ -44,6 +45,36 @@ export const PATCH: APIRoute = async ({ request }) => {
       .eq('id', bookingId);
 
     if (error) throw error;
+
+    if (status === 'paid' || status === 'cancelled') {
+      const { data: booking } = await supabaseAdmin
+        .from('bookings')
+        .select('*, properties(name)')
+        .eq('id', bookingId)
+        .single();
+
+      if (booking) {
+        const nights = Math.round(
+          (new Date(booking.check_out).getTime() - new Date(booking.check_in).getTime()) / 86400000
+        );
+        const emailData = {
+          guestName: booking.guest_name,
+          guestEmail: booking.guest_email,
+          propertyName: (booking.properties as any)?.name || '',
+          checkIn: booking.check_in,
+          checkOut: booking.check_out,
+          nights,
+          totalCents: booking.total_cents,
+          bookingId,
+        };
+
+        if (status === 'paid') {
+          sendBookingConfirmation(emailData).catch(console.error);
+        } else {
+          sendBookingCancellation(emailData).catch(console.error);
+        }
+      }
+    }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
   } catch (err) {
