@@ -127,7 +127,7 @@ export const GET: APIRoute = () => {
   <title>CMS — La Cage aux Oiseaux</title>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@%5E3.0.0/dist/decap-cms.js"></script>
+  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
   <script>
     CMS.init({ config: ${JSON.stringify(cmsConfig)} });
   </script>
