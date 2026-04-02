@@ -23,14 +23,15 @@ import Footer from '../../components/Footer.astro';
             </svg>
           </div>
 
-          <h1>Réservation enregistrée</h1>
-          <p class="confirmation-subtitle">Merci ! Votre demande de réservation a bien été reçue.</p>
+          <h1 id="confirmTitle">Réservation enregistrée</h1>
+          <p class="confirmation-subtitle" id="confirmSubtitle">Merci ! Votre demande de réservation a bien été reçue.</p>
+
+          <div class="confirmation-status" id="paymentStatus" style="display:none"></div>
 
           <div class="confirmation-details" id="details"></div>
 
-          <p class="confirmation-notice">
+          <p class="confirmation-notice" id="confirmNotice">
             Vous recevrez un email de confirmation à l'adresse indiquée.
-            Le paiement sera demandé lors de la prochaine étape.
           </p>
 
           <div class="confirmation-actions">
@@ -131,15 +132,49 @@ import Footer from '../../components/Footer.astro';
     color: var(--c-text-light);
     margin-bottom: var(--space-lg);
   }
+  .confirmation-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.5em 1.2em;
+    border-radius: var(--radius-xl);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    margin-bottom: var(--space-lg);
+  }
+  .confirmation-status--paid {
+    background: var(--c-green-light);
+    color: var(--c-green);
+  }
+  .confirmation-status--pending {
+    background: #fff3e0;
+    color: #e65100;
+  }
+  .confirmation-status--cancelled {
+    background: #fce4ec;
+    color: #c62828;
+  }
 </style>
 
 <script>
   const params = new URLSearchParams(window.location.search);
   const bookingId = params.get('id');
+  const paymentParam = params.get('payment');
   const loader = document.getElementById('loader');
   const content = document.getElementById('confirmationContent');
   const error = document.getElementById('confirmationError');
   const details = document.getElementById('details');
+  const confirmTitle = document.getElementById('confirmTitle');
+  const confirmSubtitle = document.getElementById('confirmSubtitle');
+  const confirmNotice = document.getElementById('confirmNotice');
+  const paymentStatus = document.getElementById('paymentStatus');
+
+  const STATUS_LABELS = {
+    paid: { label: 'Paiement confirmé', className: 'confirmation-status--paid' },
+    confirmed: { label: 'Confirmée', className: 'confirmation-status--paid' },
+    pending: { label: 'En attente de paiement', className: 'confirmation-status--pending' },
+    cancelled: { label: 'Annulée', className: 'confirmation-status--cancelled' },
+  };
 
   async function loadBooking() {
     if (!bookingId) {
@@ -156,6 +191,21 @@ import Footer from '../../components/Footer.astro';
       const checkIn = new Date(booking.check_in).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
       const checkOut = new Date(booking.check_out).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
       const nights = Math.round((new Date(booking.check_out) - new Date(booking.check_in)) / (1000 * 60 * 60 * 24));
+
+      if (booking.status === 'paid' || paymentParam === 'success') {
+        confirmTitle.textContent = 'Paiement confirmé !';
+        confirmSubtitle.textContent = 'Merci ! Votre réservation est confirmée et payée.';
+        confirmNotice.textContent = 'Un email de confirmation avec tous les détails vous a été envoyé.';
+      } else if (paymentParam === 'cancelled') {
+        confirmTitle.textContent = 'Paiement non finalisé';
+        confirmSubtitle.textContent = 'Votre réservation a été enregistrée mais le paiement n\'a pas abouti.';
+        confirmNotice.textContent = 'Vous pouvez nous contacter pour finaliser votre réservation.';
+      }
+
+      const statusInfo = STATUS_LABELS[booking.status] || STATUS_LABELS.pending;
+      paymentStatus.textContent = statusInfo.label;
+      paymentStatus.className = `confirmation-status ${statusInfo.className}`;
+      paymentStatus.style.display = '';
 
       details.innerHTML = `
         <div class="row"><span>Hébergement</span><strong>${booking.property_name || '—'}</strong></div>

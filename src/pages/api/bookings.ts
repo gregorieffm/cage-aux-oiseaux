@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { supabaseAdmin } from '../../lib/supabase';
 import { calculateBookingPrice, getBlockedDates, getBookedDates } from '../../lib/availability';
+import { createCheckoutSession } from '../../lib/checkout';
 
 export const POST: APIRoute = async ({ request }) => {
   if (!supabaseAdmin) {
@@ -92,14 +93,22 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (bookingError) throw bookingError;
 
-    // TODO: Phase 6 will add Stripe checkout session creation here
-    // For now, return the booking ID
+    const checkoutUrl = await createCheckoutSession({
+      bookingId: booking.id,
+      propertyName: property.name,
+      checkIn,
+      checkOut,
+      nights: pricing.nights,
+      totalCents: pricing.totalCents,
+      guestEmail,
+    });
+
     return new Response(
       JSON.stringify({
         bookingId: booking.id,
         totalCents: pricing.totalCents,
         nights: pricing.nights,
-        // checkoutUrl will be added in Phase 6
+        checkoutUrl,
       }),
       { status: 201, headers: { 'Content-Type': 'application/json' } }
     );
