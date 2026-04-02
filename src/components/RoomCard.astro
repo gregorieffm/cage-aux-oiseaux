@@ -55,10 +55,10 @@ const { name, slug, capacity, description, features, price, badge, featured = fa
   .room-card--featured {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
-  .room-card__media { position: relative; }
-  .room-card__media .img-placeholder { height: 100%; border-radius: 0; }
+  .room-card__media { position: relative; overflow: hidden; }
+  .room-card__media .img-placeholder { height: 100%; min-height: 300px; border-radius: 0; }
   .room-card__badge {
     position: absolute;
     top: var(--space-md);
@@ -73,7 +73,7 @@ const { name, slug, capacity, description, features, price, badge, featured = fa
     border-radius: var(--radius-sm);
     z-index: 1;
   }
-  .room-card__body { padding: var(--space-lg); }
+  .room-card__body { padding: var(--space-lg); min-width: 0; }
   .room-card__name {
     font-family: var(--ff-display);
     font-size: var(--fs-xl);
