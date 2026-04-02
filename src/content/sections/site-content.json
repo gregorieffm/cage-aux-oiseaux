@@ -1,0 +1,78 @@
+{
+  "hero": {
+    "subtitle": "Normandie — Orne",
+    "title": "Domaine La Cage aux Oiseaux",
+    "tagline": "Un lieu vivant, sensible, façonné par la nature et l'univers artistique de Coco Eugène Lacroix.",
+    "cta": "Découvrir nos séjours"
+  },
+  "domaine": {
+    "label": "Le Domaine",
+    "title": "Une parenthèse hors du temps",
+    "paragraphs": [
+      "Nichée dans la campagne préservée de La Lande-de-Goult, entre forêt d'Écouves et chemins de traverse, La Cage aux Oiseaux est un lieu vivant où se rencontrent l'hospitalité d'une maison d'hôtes, la créativité d'un atelier de poterie, et la nature généreuse du domaine.",
+      "Les chemins serpentent entre les oeuvres, les arbres abritent les oiseaux, et les maisons accueillent ceux qui cherchent un séjour simple, vrai, apaisant.",
+      "Au fil des saisons, le domaine respire : printemps lumineux, soirées d'été douces et boisées, automne doré, hivers silencieux et réconfortants."
+    ]
+  },
+  "spa": {
+    "label": "Bien-être",
+    "title": "Spa privatif & bains nordiques",
+    "paragraphs": [
+      "Pour prolonger la parenthèse, le domaine propose des espaces bien-être privatifs : bains nordiques chauffés au feu de bois, jacuzzi extérieur ouvert toute l'année, sauna privatif et sièges massant.",
+      "Un rituel simple : l'eau chaude, le ciel, le silence."
+    ],
+    "options": [
+      { "name": "Bain nordique privatif", "description": "Chauffé au poêle à bois, de 17h à 23h.", "price": "45 € / jour (min. 2 nuits)" },
+      { "name": "Sauna privatif", "description": "Accès illimité au sauna chauffé au poêle à bois, de 17h à 23h.", "price": "40 € / séance" },
+      { "name": "Jacuzzi extérieur", "description": "Ouvert toute l'année, sous les étoiles." }
+    ]
+  },
+  "atelier": {
+    "label": "Art & Terre",
+    "title": "L'Atelier & la Galerie",
+    "intro": "La galerie du domaine présente les créations en grès, terre cuite et sculptures de Coco Eugène Lacroix. Un espace où la terre raconte des histoires, avec des pièces façonnées à la main — bols, sculptures, formes organiques inspirées de la nature.",
+    "galleryText": [
+      "La galerie est ouverte sur rendez-vous, pour prendre le temps d'échanger, de comprendre la démarche et de toucher la terre. Ce n'est pas une boutique classique : c'est un lieu vivant, chaleureux, où la création se dévoile simplement.",
+      "Il est possible d'acheter une pièce sur place, ou d'offrir un bon cadeau pour une journée découverte."
+    ],
+    "decoTitle": "Décoration de jardin",
+    "decoDescription": "Pommes et boules en grès et porcelaine à suspendre dans les arbres — de 25 à 45 €"
+  },
+  "stages": {
+    "label": "Expériences",
+    "title": "Stages de céramique",
+    "description": "Des stages pour débutants et confirmés, pour découvrir le travail de la terre dans un cadre inspirant. Le matin, on aborde la technique du colombin, de la plaque, du bol. L'après-midi amène vers des créations plus personnalisées.",
+    "formulas": [
+      { "name": "Journée complète", "hours": "10h — 17h", "price": "80 €", "note": "Terre & cuisson comprises" },
+      { "name": "Demi-journée", "hours": "10h — 13h", "price": "50 €", "note": "Terre & cuisson comprises" }
+    ]
+  },
+  "reviews": {
+    "label": "Ils témoignent",
+    "title": "Ce que nos hôtes en disent",
+    "subtitle": "#1 des chambres d'hôtes à La Lande-de-Goult sur TripAdvisor — Note de 5/5",
+    "items": [
+      { "text": "Un lieu magique, hors du temps. On a tout aimé : la cabane, le bain nordique, le petit-déjeuner avec les produits du jardin. Coco est d'une gentillesse rare.", "author": "Un voyageur TripAdvisor", "rating": 5 },
+      { "text": "Un vrai cocon au milieu de la nature. La chambre était parfaite, l'atelier de céramique une belle découverte. On reviendra, c'est certain !", "author": "Un voyageur TripAdvisor", "rating": 5 },
+      { "text": "Parfait pour une escapade en famille. Les enfants ont adoré la chambre Larguez les Amarres, et nous le spa privatif. Un endroit unique en Normandie.", "author": "Un voyageur TripAdvisor", "rating": 5 }
+    ]
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Réserver votre séjour",
+    "intro": "Pour toute demande de réservation ou d'information, n'hésitez pas à nous écrire. Nous vous répondrons avec plaisir.",
+    "address": ["La Perdrière", "61320 La Lande-de-Goult", "Orne, Normandie"],
+    "facebook": "https://www.facebook.com/lacageauxoiseaux.fr/"
+  },
+  "location": {
+    "label": "Nous trouver",
+    "title": "Au coeur de la Normandie",
+    "address": ["Domaine La Cage aux Oiseaux", "La Perdrière", "61320 La Lande-de-Goult", "Orne, Normandie"],
+    "nearby": [
+      "Parc Naturel Régional Normandie-Maine — 10 km",
+      "Château de Carrouges — 11 km",
+      "Golf de Bagnoles-de-l'Orne — 26 km",
+      "Aéroport de Caen-Carpiquet — 80 km"
+    ]
+  }
+}

@@ -1,9 +1,15 @@
+---
+import { getEntry } from 'astro:content';
+const { data: content } = await getEntry('sections', 'site-content');
+const a = content.atelier;
+---
+
 <section class="section atelier" id="atelier">
   <div class="container">
     <div class="section__header">
-      <span class="section__label">Art & Terre</span>
-      <h2 class="section__title">L'Atelier & la Galerie</h2>
-      <p class="section__intro">La galerie du domaine présente les créations en grès, terre cuite et sculptures de Coco Eugène Lacroix. Un espace où la terre raconte des histoires, avec des pièces façonnées à la main — bols, sculptures, formes organiques inspirées de la nature.</p>
+      <span class="section__label">{a.label}</span>
+      <h2 class="section__title">{a.title}</h2>
+      <p class="section__intro">{a.intro}</p>
     </div>
 
     <div class="atelier__grid">
@@ -15,8 +21,7 @@
       </div>
       <div class="atelier__item atelier__item--text">
         <h3>Un lieu vivant</h3>
-        <p>La galerie est ouverte sur rendez-vous, pour prendre le temps d'échanger, de comprendre la démarche et de toucher la terre. Ce n'est pas une boutique classique : c'est un lieu vivant, chaleureux, où la création se dévoile simplement.</p>
-        <p>Il est possible d'acheter une pièce sur place, ou d'offrir un bon cadeau pour une journée découverte.</p>
+        {a.galleryText.map(p => <p>{p}</p>)}
       </div>
       <div class="atelier__item">
         <div class="img-placeholder img-placeholder--square" data-label="Déco de jardin"></div>
@@ -27,8 +32,8 @@
     </div>
 
     <div class="atelier__deco">
-      <h3>Décoration de jardin</h3>
-      <p>Pommes et boules en grès et porcelaine à suspendre dans les arbres — <strong>de 25 à 45 €</strong></p>
+      <h3>{a.decoTitle}</h3>
+      <p>{a.decoDescription}</p>
     </div>
   </div>
 </section>

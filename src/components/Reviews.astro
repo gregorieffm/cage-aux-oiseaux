@@ -1,33 +1,22 @@
 ---
-const reviews = [
-  {
-    text: "Un lieu magique, hors du temps. On a tout aimé : la cabane, le bain nordique, le petit-déjeuner avec les produits du jardin. Coco est d'une gentillesse rare.",
-    author: 'Un voyageur TripAdvisor',
-  },
-  {
-    text: "Un vrai cocon au milieu de la nature. La chambre était parfaite, l'atelier de céramique une belle découverte. On reviendra, c'est certain !",
-    author: 'Un voyageur TripAdvisor',
-  },
-  {
-    text: "Parfait pour une escapade en famille. Les enfants ont adoré la chambre Larguez les Amarres, et nous le spa privatif. Un endroit unique en Normandie.",
-    author: 'Un voyageur TripAdvisor',
-  },
-];
+import { getEntry } from 'astro:content';
+const { data: content } = await getEntry('sections', 'site-content');
+const r = content.reviews;
 ---
 
 <section class="section reviews">
   <div class="container">
     <div class="section__header">
-      <span class="section__label">Ils témoignent</span>
-      <h2 class="section__title">Ce que nos hôtes en disent</h2>
-      <p class="section__intro">#1 des chambres d'hôtes à La Lande-de-Goult sur TripAdvisor — Note de 5/5</p>
+      <span class="section__label">{r.label}</span>
+      <h2 class="section__title">{r.title}</h2>
+      <p class="section__intro">{r.subtitle}</p>
     </div>
     <div class="reviews__grid">
-      {reviews.map(r => (
+      {r.items.map(review => (
         <blockquote class="review">
-          <div class="review__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p>&laquo; {r.text} &raquo;</p>
-          <cite>— {r.author}</cite>
+          <div class="review__stars">{'★'.repeat(review.rating)}</div>
+          <p>&laquo; {review.text} &raquo;</p>
+          <cite>— {review.author}</cite>
         </blockquote>
       ))}
     </div>

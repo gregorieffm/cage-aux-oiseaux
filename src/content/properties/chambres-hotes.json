@@ -1,0 +1,17 @@
+{
+  "name": "Les Chambres d'Hôtes",
+  "slug": "chambres-hotes",
+  "order": 5,
+  "featured": false,
+  "capacity": "2 personnes",
+  "description": "Des cocons chaleureux, simples, enveloppants, chacun avec son âme propre. Le matin, les paniers se remplissent de produits locaux, de préparations maison, parfois du jardin selon la saison.",
+  "features": [
+    "Labellisées Gîtes de France",
+    "Petit-déjeuner maison",
+    "Salle de bain privée",
+    "Vue sur le jardin",
+    "WiFi gratuit"
+  ],
+  "icalFeeds": [],
+  "seasonalPricing": []
+}

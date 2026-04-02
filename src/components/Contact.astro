@@ -1,9 +1,18 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+const { data: content } = await getEntry('sections', 'site-content');
+const c = content.contact;
+
+const allProperties = await getCollection('properties');
+const properties = allProperties.sort((a, b) => a.data.order - b.data.order);
+---
+
 <section class="section contact" id="contact">
   <div class="container">
     <div class="section__header">
-      <span class="section__label">Contact</span>
-      <h2 class="section__title">Réserver votre séjour</h2>
-      <p class="section__intro">Pour toute demande de réservation ou d'information, n'hésitez pas à nous écrire. Nous vous répondrons avec plaisir.</p>
+      <span class="section__label">{c.label}</span>
+      <h2 class="section__title">{c.title}</h2>
+      <p class="section__intro">{c.intro}</p>
     </div>
 
     <form class="form" id="contactForm">
@@ -31,11 +40,9 @@
         <label for="hebergement">Hébergement</label>
         <select id="hebergement" name="hebergement">
           <option value="">— Choisir un hébergement —</option>
-          <option value="cabane-leo">La Cabane de Léo</option>
-          <option value="nuit-insolite">Une Nuit Insolite</option>
-          <option value="suite-nordique">La Suite Nordique</option>
-          <option value="larguez-amarres">Larguez les Amarres</option>
-          <option value="chambres">Chambres d'hôtes</option>
+          {properties.map(p => (
+            <option value={p.data.slug}>{p.data.name}</option>
+          ))}
           <option value="stage">Stage céramique</option>
           <option value="autre">Autre demande</option>
         </select>
@@ -64,9 +71,7 @@
     grid-template-columns: 1fr 1fr;
     gap: var(--space-md);
   }
-  .form__group {
-    margin-bottom: var(--space-md);
-  }
+  .form__group { margin-bottom: var(--space-md); }
   .form__group label {
     display: block;
     font-size: var(--fs-sm);
@@ -108,8 +113,6 @@
     const originalText = btn.textContent;
     btn.textContent = 'Envoi en cours...';
     btn.disabled = true;
-
-    // TODO: Replace with real API call
     setTimeout(() => {
       btn.textContent = 'Message envoyé !';
       btn.style.background = '#6b7f5e';

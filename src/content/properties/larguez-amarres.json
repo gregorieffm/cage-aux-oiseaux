@@ -1,0 +1,16 @@
+{
+  "name": "Larguez les Amarres",
+  "slug": "larguez-amarres",
+  "order": 4,
+  "featured": false,
+  "capacity": "Jusqu'à 5 personnes",
+  "description": "L'âme d'un petit bateau amarré au calme du domaine : bois blond, détails marins, esprit cabine. Pensée pour les familles, les fratries, les tribus de passage. 3 espaces lits qui rappellent les couchages malins des bateaux.",
+  "features": [
+    "Idéale familles",
+    "3 espaces couchage",
+    "Esprit cabine marine",
+    "Coin cabine cosy"
+  ],
+  "icalFeeds": [],
+  "seasonalPricing": []
+}

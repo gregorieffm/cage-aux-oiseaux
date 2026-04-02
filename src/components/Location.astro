@@ -1,20 +1,18 @@
+---
+import { getEntry } from 'astro:content';
+const { data: content } = await getEntry('sections', 'site-content');
+const loc = content.location;
+---
+
 <section class="section location">
   <div class="container">
     <div class="split">
       <div class="split__text">
-        <span class="section__label">Nous trouver</span>
-        <h2 class="section__title">Au coeur<br />de la Normandie</h2>
-        <address>
-          <strong>Domaine La Cage aux Oiseaux</strong><br />
-          La Perdrière<br />
-          61320 La Lande-de-Goult<br />
-          Orne, Normandie
-        </address>
+        <span class="section__label">{loc.label}</span>
+        <h2 class="section__title" set:html={loc.title.replace(' de', ' de<br />')} />
+        <address set:html={loc.address.map(l => `<strong>${l}</strong>`).join('<br />').replace(/<strong>(?!Domaine)/g, ''). replace(/<\/strong>(?!<br)(?!$)/g, '')} />
         <ul class="location__nearby">
-          <li>Parc Naturel Régional Normandie-Maine — 10 km</li>
-          <li>Château de Carrouges — 11 km</li>
-          <li>Golf de Bagnoles-de-l'Orne — 26 km</li>
-          <li>Aéroport de Caen-Carpiquet — 80 km</li>
+          {loc.nearby.map(n => <li>{n}</li>)}
         </ul>
       </div>
       <div class="split__media">

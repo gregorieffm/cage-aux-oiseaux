@@ -1,3 +1,9 @@
+---
+import { getEntry } from 'astro:content';
+const { data: content } = await getEntry('sections', 'site-content');
+const d = content.domaine;
+---
+
 <section class="section domaine" id="domaine">
   <div class="container">
     <div class="split split--reverse">
@@ -5,11 +11,9 @@
         <div class="img-placeholder img-placeholder--tall" data-label="Vue du domaine"></div>
       </div>
       <div class="split__text">
-        <span class="section__label">Le Domaine</span>
-        <h2 class="section__title">Une parenthèse<br />hors du temps</h2>
-        <p>Nichée dans la campagne préservée de La Lande-de-Goult, entre forêt d'Écouves et chemins de traverse, La Cage aux Oiseaux est un lieu vivant où se rencontrent l'hospitalité d'une maison d'hôtes, la créativité d'un atelier de poterie, et la nature généreuse du domaine.</p>
-        <p>Les chemins serpentent entre les oeuvres, les arbres abritent les oiseaux, et les maisons accueillent ceux qui cherchent un séjour simple, vrai, apaisant.</p>
-        <p>Au fil des saisons, le domaine respire : printemps lumineux, soirées d'été douces et boisées, automne doré, hivers silencieux et réconfortants.</p>
+        <span class="section__label">{d.label}</span>
+        <h2 class="section__title" set:html={d.title.replace(' hors', '<br />hors')} />
+        {d.paragraphs.map(p => <p>{p}</p>)}
       </div>
     </div>
   </div>

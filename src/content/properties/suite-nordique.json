@@ -1,0 +1,17 @@
+{
+  "name": "La Suite Nordique",
+  "slug": "suite-nordique",
+  "order": 3,
+  "featured": false,
+  "capacity": "2 personnes",
+  "description": "Chambre en mezzanine avec lit double 160, coin salon-cuisine, entrée privative et petite terrasse. Un espace pensé pour le bien-être avec spa nordique privatif.",
+  "features": [
+    "Mezzanine — Lit 160",
+    "Salon & cuisine privés",
+    "Spa nordique privatif 3 pers.",
+    "2 sièges massant",
+    "Terrasse privée"
+  ],
+  "icalFeeds": [],
+  "seasonalPricing": []
+}

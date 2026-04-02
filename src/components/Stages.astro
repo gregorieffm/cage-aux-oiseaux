@@ -1,3 +1,9 @@
+---
+import { getEntry } from 'astro:content';
+const { data: content } = await getEntry('sections', 'site-content');
+const s = content.stages;
+---
+
 <section class="section stages" id="stages">
   <div class="container">
     <div class="split split--reverse">
@@ -5,23 +11,19 @@
         <div class="img-placeholder img-placeholder--tall" data-label="Stage céramique"></div>
       </div>
       <div class="split__text">
-        <span class="section__label">Expériences</span>
-        <h2 class="section__title">Stages de<br />céramique</h2>
-        <p>Des stages pour débutants et confirmés, pour découvrir le travail de la terre dans un cadre inspirant. Le matin, on aborde la technique du colombin, de la plaque, du bol. L'après-midi amène vers des créations plus personnalisées.</p>
+        <span class="section__label">{s.label}</span>
+        <h2 class="section__title" set:html={s.title.replace(' de', ' de<br />')} />
+        <p>{s.description}</p>
 
         <div class="stages__cards">
-          <div class="stage-card">
-            <h4>Journée complète</h4>
-            <p>10h — 17h</p>
-            <span class="stage-card__price">80 €</span>
-            <small>Terre & cuisson comprises</small>
-          </div>
-          <div class="stage-card">
-            <h4>Demi-journée</h4>
-            <p>10h — 13h</p>
-            <span class="stage-card__price">50 €</span>
-            <small>Terre & cuisson comprises</small>
-          </div>
+          {s.formulas.map(f => (
+            <div class="stage-card">
+              <h4>{f.name}</h4>
+              <p>{f.hours}</p>
+              <span class="stage-card__price">{f.price}</span>
+              <small>{f.note}</small>
+            </div>
+          ))}
         </div>
 
         <a href="#contact" class="btn btn--outline">Réserver un stage</a>

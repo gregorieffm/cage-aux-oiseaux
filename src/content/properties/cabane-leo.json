@@ -1,0 +1,22 @@
+{
+  "name": "La Cabane de Léo",
+  "slug": "cabane-leo",
+  "order": 1,
+  "featured": true,
+  "badge": "Coup de coeur",
+  "capacity": "2 personnes",
+  "description": "Un lieu à part — une petite maison chaleureuse, posée dans un coin du domaine. Une cabane pour ralentir, respirer, retrouver ce plaisir simple d'ouvrir une porte en bois et de sentir que l'on entre dans un monde à soi : intime, doux, un peu magique.",
+  "features": [
+    "Spa nordique privatif",
+    "Bain nordique de 17h à 23h",
+    "Salle de bain privative",
+    "Petit-déjeuner inclus"
+  ],
+  "price": "225 €",
+  "icalFeeds": [],
+  "seasonalPricing": [
+    { "label": "Basse saison", "startMonth": 11, "endMonth": 3, "pricePerNight": 225, "minNights": 1 },
+    { "label": "Moyenne saison", "startMonth": 4, "endMonth": 6, "pricePerNight": 250, "minNights": 2 },
+    { "label": "Haute saison", "startMonth": 7, "endMonth": 10, "pricePerNight": 280, "minNights": 2 }
+  ]
+}
