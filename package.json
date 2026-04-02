@@ -7,8 +7,9 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "tinacms dev -c \"astro dev\"",
+    "dev:astro": "astro dev",
+    "build": "tinacms build && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "db:migrate": "echo 'Run SQL migrations in Supabase Dashboard > SQL Editor'"
@@ -16,6 +17,10 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.49.0",
     "astro": "^6.1.3",
-    "stripe": "^17.7.0"
+    "stripe": "^17.7.0",
+    "tinacms": "^2.6.1"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^1.6.12"
   }
 }
