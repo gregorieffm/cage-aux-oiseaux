@@ -12,6 +12,11 @@
     "Vue sur le jardin",
     "WiFi gratuit"
   ],
+  "price": "120 €",
   "icalFeeds": [],
-  "seasonalPricing": []
+  "seasonalPricing": [
+    { "label": "Basse saison", "startMonth": 11, "endMonth": 3, "pricePerNight": 120, "minNights": 1 },
+    { "label": "Moyenne saison", "startMonth": 4, "endMonth": 6, "pricePerNight": 140, "minNights": 1 },
+    { "label": "Haute saison", "startMonth": 7, "endMonth": 10, "pricePerNight": 160, "minNights": 2 }
+  ]
 }

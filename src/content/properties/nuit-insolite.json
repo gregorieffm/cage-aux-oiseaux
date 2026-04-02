@@ -12,6 +12,11 @@
     "Sauna infrarouge",
     "2 sièges massant"
   ],
+  "price": "180 €",
   "icalFeeds": [],
-  "seasonalPricing": []
+  "seasonalPricing": [
+    { "label": "Basse saison", "startMonth": 11, "endMonth": 3, "pricePerNight": 180, "minNights": 1 },
+    { "label": "Moyenne saison", "startMonth": 4, "endMonth": 6, "pricePerNight": 200, "minNights": 2 },
+    { "label": "Haute saison", "startMonth": 7, "endMonth": 10, "pricePerNight": 230, "minNights": 2 }
+  ]
 }
