@@ -32,7 +32,6 @@ export default defineConfig({
         format: 'json',
         ui: {
           allowedActions: { create: false, delete: false },
-          global: true,
         },
         fields: [
           {
@@ -42,7 +41,7 @@ export default defineConfig({
             fields: [
               { type: 'string', name: 'subtitle', label: 'Sous-titre' },
               { type: 'string', name: 'title', label: 'Titre principal' },
-              { type: 'string', name: 'tagline', label: 'Accroche', ui: { component: 'textarea' } },
+              { type: 'string', name: 'tagline', label: 'Accroche' },
               { type: 'string', name: 'cta', label: 'Bouton (texte)' },
             ],
           },
@@ -53,7 +52,7 @@ export default defineConfig({
             fields: [
               { type: 'string', name: 'label', label: 'Label section' },
               { type: 'string', name: 'title', label: 'Titre' },
-              { type: 'string', name: 'paragraphs', label: 'Paragraphes', list: true, ui: { component: 'textarea' } },
+              { type: 'string', name: 'paragraphs', label: 'Paragraphes', list: true },
             ],
           },
           {
@@ -63,7 +62,7 @@ export default defineConfig({
             fields: [
               { type: 'string', name: 'label', label: 'Label section' },
               { type: 'string', name: 'title', label: 'Titre' },
-              { type: 'string', name: 'paragraphs', label: 'Paragraphes', list: true, ui: { component: 'textarea' } },
+              { type: 'string', name: 'paragraphs', label: 'Paragraphes', list: true },
               {
                 type: 'object',
                 name: 'options',
@@ -84,8 +83,8 @@ export default defineConfig({
             fields: [
               { type: 'string', name: 'label', label: 'Label section' },
               { type: 'string', name: 'title', label: 'Titre' },
-              { type: 'string', name: 'intro', label: 'Introduction', ui: { component: 'textarea' } },
-              { type: 'string', name: 'galleryText', label: 'Texte galerie', list: true, ui: { component: 'textarea' } },
+              { type: 'string', name: 'intro', label: 'Introduction' },
+              { type: 'string', name: 'galleryText', label: 'Texte galerie', list: true },
               { type: 'string', name: 'decoTitle', label: 'Titre déco' },
               { type: 'string', name: 'decoDescription', label: 'Description déco' },
             ],
@@ -97,7 +96,7 @@ export default defineConfig({
             fields: [
               { type: 'string', name: 'label', label: 'Label section' },
               { type: 'string', name: 'title', label: 'Titre' },
-              { type: 'string', name: 'description', label: 'Description', ui: { component: 'textarea' } },
+              { type: 'string', name: 'description', label: 'Description' },
               {
                 type: 'object',
                 name: 'formulas',
@@ -126,7 +125,7 @@ export default defineConfig({
                 label: 'Avis',
                 list: true,
                 fields: [
-                  { type: 'string', name: 'text', label: 'Texte', ui: { component: 'textarea' } },
+                  { type: 'string', name: 'text', label: 'Texte' },
                   { type: 'string', name: 'author', label: 'Auteur' },
                   { type: 'number', name: 'rating', label: 'Note (1-5)' },
                 ],
@@ -140,7 +139,7 @@ export default defineConfig({
             fields: [
               { type: 'string', name: 'label', label: 'Label section' },
               { type: 'string', name: 'title', label: 'Titre' },
-              { type: 'string', name: 'intro', label: 'Introduction', ui: { component: 'textarea' } },
+              { type: 'string', name: 'intro', label: 'Introduction' },
               { type: 'string', name: 'address', label: 'Adresse (lignes)', list: true },
               { type: 'string', name: 'phone', label: 'Téléphone' },
               { type: 'string', name: 'email', label: 'Email' },
@@ -168,11 +167,11 @@ export default defineConfig({
         fields: [
           { type: 'string', name: 'name', label: 'Nom', required: true },
           { type: 'string', name: 'slug', label: 'Slug (URL)', required: true },
-          { type: 'number', name: 'order', label: 'Ordre d\'affichage', required: true },
+          { type: 'number', name: 'order', label: "Ordre d'affichage", required: true },
           { type: 'boolean', name: 'featured', label: 'Mise en avant' },
           { type: 'string', name: 'badge', label: 'Badge (ex: Coup de coeur)' },
           { type: 'string', name: 'capacity', label: 'Capacité', required: true },
-          { type: 'string', name: 'description', label: 'Description', required: true, ui: { component: 'textarea' } },
+          { type: 'string', name: 'description', label: 'Description', required: true },
           { type: 'string', name: 'features', label: 'Caractéristiques', list: true },
           { type: 'string', name: 'price', label: 'Prix affiché (ex: 225 €)' },
           { type: 'string', name: 'priceNote', label: 'Note tarifaire' },
