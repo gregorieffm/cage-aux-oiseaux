@@ -1,0 +1,584 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const { slug } = Astro.params;
+const allProperties = await getCollection('properties');
+const property = allProperties.find(p => p.data.slug === slug);
+
+if (!property) {
+  return Astro.redirect('/');
+}
+
+const p = property.data;
+---
+
+<Layout title={`Réserver — ${p.name} | La Cage aux Oiseaux`}>
+  <Nav />
+
+  <main class="booking-page">
+    <div class="container">
+      <a href="/#hebergements" class="booking-back">&larr; Retour aux hébergements</a>
+
+      <div class="booking-layout">
+        <!-- Left: Property info + Calendar -->
+        <div class="booking-main">
+          <div class="booking-hero">
+            <div class="img-placeholder img-placeholder--wide" data-label={p.name}></div>
+          </div>
+
+          <h1 class="booking-title">{p.name}</h1>
+          <p class="booking-capacity">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+            </svg>
+            {p.capacity}
+          </p>
+          <p class="booking-desc">{p.description}</p>
+
+          <ul class="booking-features">
+            {p.features.map(f => <li>{f}</li>)}
+          </ul>
+
+          <h2 class="booking-section-title">Choisissez vos dates</h2>
+          <div class="calendar" id="calendar" data-property={p.slug}>
+            <div class="calendar__nav">
+              <button class="calendar__arrow" id="prevMonth" aria-label="Mois précédent">&larr;</button>
+              <span class="calendar__month" id="monthLabel"></span>
+              <button class="calendar__arrow" id="nextMonth" aria-label="Mois suivant">&rarr;</button>
+            </div>
+            <div class="calendar__grid">
+              <div class="calendar__day-name">Lun</div>
+              <div class="calendar__day-name">Mar</div>
+              <div class="calendar__day-name">Mer</div>
+              <div class="calendar__day-name">Jeu</div>
+              <div class="calendar__day-name">Ven</div>
+              <div class="calendar__day-name">Sam</div>
+              <div class="calendar__day-name">Dim</div>
+              <div id="calendarDays"></div>
+            </div>
+            <div class="calendar__legend">
+              <span><span class="legend-dot legend-dot--available"></span> Disponible</span>
+              <span><span class="legend-dot legend-dot--blocked"></span> Indisponible</span>
+              <span><span class="legend-dot legend-dot--selected"></span> Sélectionné</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Booking summary + Form -->
+        <aside class="booking-sidebar">
+          <div class="booking-card" id="bookingCard">
+            <h3>Votre réservation</h3>
+
+            <div class="booking-dates" id="bookingDates">
+              <p class="booking-dates__empty">Sélectionnez vos dates d'arrivée et de départ sur le calendrier.</p>
+            </div>
+
+            <div class="booking-summary" id="bookingSummary" style="display:none">
+              <div class="booking-summary__row">
+                <span>Arrivée</span>
+                <strong id="summaryCheckin">—</strong>
+              </div>
+              <div class="booking-summary__row">
+                <span>Départ</span>
+                <strong id="summaryCheckout">—</strong>
+              </div>
+              <div class="booking-summary__row">
+                <span>Nuits</span>
+                <strong id="summaryNights">—</strong>
+              </div>
+              <hr />
+              <div class="booking-summary__row booking-summary__total">
+                <span>Total</span>
+                <strong id="summaryTotal">—</strong>
+              </div>
+            </div>
+
+            <form class="booking-form" id="bookingForm" style="display:none">
+              <div class="booking-form__group">
+                <label for="guestName">Nom complet</label>
+                <input type="text" id="guestName" name="guestName" required placeholder="Jean Dupont" />
+              </div>
+              <div class="booking-form__group">
+                <label for="guestEmail">Email</label>
+                <input type="email" id="guestEmail" name="guestEmail" required placeholder="jean@email.com" />
+              </div>
+              <div class="booking-form__group">
+                <label for="guestPhone">Téléphone</label>
+                <input type="tel" id="guestPhone" name="guestPhone" placeholder="06 12 34 56 78" />
+              </div>
+              <div class="booking-form__group">
+                <label for="guestMessage">Message (optionnel)</label>
+                <textarea id="guestMessage" name="guestMessage" rows="3" placeholder="Demandes particulières..."></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary btn--full" id="bookingSubmit">
+                Procéder au paiement
+              </button>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .booking-page {
+    padding-top: 100px;
+    padding-bottom: var(--space-3xl);
+    min-height: 100vh;
+  }
+  .booking-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: var(--fs-sm);
+    color: var(--c-accent);
+    margin-bottom: var(--space-lg);
+    transition: var(--transition);
+  }
+  .booking-back:hover { color: var(--c-accent-dark); }
+
+  .booking-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .booking-hero { margin-bottom: var(--space-lg); border-radius: var(--radius-lg); overflow: hidden; }
+  .booking-title {
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    font-weight: 300;
+    margin-bottom: var(--space-xs);
+  }
+  .booking-capacity {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: var(--fs-sm);
+    color: var(--c-text-light);
+    margin-bottom: var(--space-md);
+  }
+  .booking-desc {
+    color: var(--c-text-light);
+    margin-bottom: var(--space-md);
+    line-height: 1.8;
+  }
+  .booking-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xl);
+  }
+  .booking-features li {
+    background: var(--c-green-light);
+    color: var(--c-green);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    padding: 0.3em 0.8em;
+    border-radius: var(--radius-xl);
+  }
+  .booking-section-title {
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    font-weight: 400;
+    margin-bottom: var(--space-md);
+  }
+
+  /* Calendar */
+  .calendar {
+    background: var(--c-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-md);
+  }
+  .calendar__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+  }
+  .calendar__month {
+    font-family: var(--ff-display);
+    font-size: var(--fs-lg);
+    font-weight: 400;
+    text-transform: capitalize;
+  }
+  .calendar__arrow {
+    background: none;
+    border: 1px solid var(--c-cream);
+    border-radius: var(--radius-sm);
+    padding: 0.4em 0.8em;
+    cursor: pointer;
+    font-size: var(--fs-md);
+    transition: var(--transition);
+  }
+  .calendar__arrow:hover { background: var(--c-bg-warm); }
+  .calendar__grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+  .calendar__day-name {
+    text-align: center;
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--c-text-light);
+    padding: 0.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .calendar__legend {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+    font-size: var(--fs-xs);
+    color: var(--c-text-light);
+  }
+  .calendar__legend span { display: flex; align-items: center; gap: 0.4em; }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .legend-dot--available { background: var(--c-green); }
+  .legend-dot--blocked { background: var(--c-cream); }
+  .legend-dot--selected { background: var(--c-accent); }
+
+  /* Sidebar */
+  .booking-card {
+    background: var(--c-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 100px;
+  }
+  .booking-card h3 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    font-weight: 400;
+    margin-bottom: var(--space-md);
+  }
+  .booking-dates__empty {
+    color: var(--c-text-light);
+    font-size: var(--fs-sm);
+    text-align: center;
+    padding: var(--space-lg) 0;
+  }
+  .booking-summary__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 0;
+    font-size: var(--fs-sm);
+  }
+  .booking-summary__row span { color: var(--c-text-light); }
+  .booking-summary hr {
+    border: none;
+    border-top: 1px solid var(--c-cream);
+    margin: var(--space-sm) 0;
+  }
+  .booking-summary__total {
+    font-size: var(--fs-md);
+  }
+  .booking-summary__total strong {
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    color: var(--c-accent);
+  }
+
+  /* Booking form */
+  .booking-form { margin-top: var(--space-md); }
+  .booking-form__group { margin-bottom: var(--space-sm); }
+  .booking-form__group label {
+    display: block;
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    margin-bottom: 0.3em;
+  }
+  .booking-form__group input,
+  .booking-form__group textarea {
+    width: 100%;
+    padding: 0.7em 0.9em;
+    font-family: var(--ff-body);
+    font-size: var(--fs-sm);
+    border: 1.5px solid var(--c-cream);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: var(--transition);
+  }
+  .booking-form__group input:focus,
+  .booking-form__group textarea:focus {
+    border-color: var(--c-accent);
+    box-shadow: 0 0 0 3px rgba(139,111,78,.1);
+  }
+  .booking-form__group textarea { resize: vertical; }
+
+  @media (max-width: 968px) {
+    .booking-layout {
+      grid-template-columns: 1fr;
+    }
+    .booking-card { position: static; }
+  }
+</style>
+
+<script define:vars={{ propertySlug: p.slug, propertyId: p.slug }}>
+  const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+  let availabilityCache = {};
+  let checkIn = null;
+  let checkOut = null;
+
+  const monthLabel = document.getElementById('monthLabel');
+  const calendarDays = document.getElementById('calendarDays');
+  const prevBtn = document.getElementById('prevMonth');
+  const nextBtn = document.getElementById('nextMonth');
+  const bookingDates = document.getElementById('bookingDates');
+  const bookingSummary = document.getElementById('bookingSummary');
+  const bookingForm = document.getElementById('bookingForm');
+  const summaryCheckin = document.getElementById('summaryCheckin');
+  const summaryCheckout = document.getElementById('summaryCheckout');
+  const summaryNights = document.getElementById('summaryNights');
+  const summaryTotal = document.getElementById('summaryTotal');
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  function formatCents(cents) {
+    return (cents / 100).toFixed(0) + ' €';
+  }
+
+  async function fetchAvailability(year, month) {
+    const key = `${year}-${month}`;
+    if (availabilityCache[key]) return availabilityCache[key];
+
+    const from = `${year}-${String(month + 1).padStart(2, '0')}-01`;
+    const lastDay = new Date(year, month + 1, 0).getDate();
+    const to = `${year}-${String(month + 1).padStart(2, '0')}-${lastDay}`;
+
+    try {
+      const res = await fetch(`/api/availability?property=${propertyId}&from=${from}&to=${to}`);
+      const data = await res.json();
+      if (data.dates) {
+        const map = {};
+        data.dates.forEach(d => { map[d.date] = d; });
+        availabilityCache[key] = map;
+        return map;
+      }
+    } catch (e) {
+      console.error('Failed to fetch availability', e);
+    }
+
+    return {};
+  }
+
+  async function renderCalendar() {
+    monthLabel.textContent = `${MONTHS_FR[currentMonth]} ${currentYear}`;
+
+    const availability = await fetchAvailability(currentYear, currentMonth);
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const startOffset = (firstDay === 0 ? 6 : firstDay - 1);
+    const today = new Date().toISOString().split('T')[0];
+
+    let html = '';
+
+    for (let i = 0; i < startOffset; i++) {
+      html += '<div class="cal-day cal-day--empty"></div>';
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      const info = availability[dateStr];
+      const isPast = dateStr < today;
+      const isAvailable = info ? info.available : true;
+      const isBlocked = isPast || !isAvailable;
+
+      const isCheckIn = checkIn === dateStr;
+      const isCheckOut = checkOut === dateStr;
+      const isInRange = checkIn && checkOut && dateStr > checkIn && dateStr < checkOut;
+      const price = info ? info.pricePerNightCents : 0;
+
+      let classes = 'cal-day';
+      if (isBlocked) classes += ' cal-day--blocked';
+      else classes += ' cal-day--available';
+      if (isCheckIn) classes += ' cal-day--checkin';
+      if (isCheckOut) classes += ' cal-day--checkout';
+      if (isInRange) classes += ' cal-day--range';
+
+      html += `<div class="${classes}" data-date="${dateStr}" ${isBlocked ? '' : `data-price="${price}"`}>
+        <span class="cal-day__num">${day}</span>
+        ${!isBlocked && price ? `<span class="cal-day__price">${(price/100).toFixed(0)}€</span>` : ''}
+      </div>`;
+    }
+
+    calendarDays.innerHTML = html;
+
+    calendarDays.querySelectorAll('.cal-day--available').forEach(el => {
+      el.addEventListener('click', () => handleDateClick(el.dataset.date));
+    });
+  }
+
+  function handleDateClick(dateStr) {
+    if (!checkIn || (checkIn && checkOut)) {
+      checkIn = dateStr;
+      checkOut = null;
+    } else if (dateStr > checkIn) {
+      checkOut = dateStr;
+    } else {
+      checkIn = dateStr;
+      checkOut = null;
+    }
+
+    renderCalendar();
+    updateSummary();
+  }
+
+  function updateSummary() {
+    if (!checkIn || !checkOut) {
+      bookingDates.style.display = '';
+      bookingSummary.style.display = 'none';
+      bookingForm.style.display = 'none';
+      return;
+    }
+
+    bookingDates.style.display = 'none';
+    bookingSummary.style.display = '';
+    bookingForm.style.display = '';
+
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
+    const nights = Math.round((end - start) / (1000 * 60 * 60 * 24));
+
+    let totalCents = 0;
+    for (const key in availabilityCache) {
+      const map = availabilityCache[key];
+      for (const dateStr in map) {
+        if (dateStr >= checkIn && dateStr < checkOut && map[dateStr].available) {
+          totalCents += map[dateStr].pricePerNightCents;
+        }
+      }
+    }
+
+    summaryCheckin.textContent = formatDate(checkIn);
+    summaryCheckout.textContent = formatDate(checkOut);
+    summaryNights.textContent = `${nights} nuit${nights > 1 ? 's' : ''}`;
+    summaryTotal.textContent = totalCents > 0 ? formatCents(totalCents) : 'Sur devis';
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderCalendar();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    renderCalendar();
+  });
+
+  // Form submission
+  document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('bookingSubmit');
+    btn.textContent = 'Traitement en cours...';
+    btn.disabled = true;
+
+    const body = {
+      propertyId,
+      checkIn,
+      checkOut,
+      guestName: document.getElementById('guestName').value,
+      guestEmail: document.getElementById('guestEmail').value,
+      guestPhone: document.getElementById('guestPhone').value,
+      guestMessage: document.getElementById('guestMessage').value,
+    };
+
+    try {
+      const res = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      } else if (data.bookingId) {
+        window.location.href = `/booking/confirmation?id=${data.bookingId}`;
+      } else {
+        throw new Error(data.error || 'Booking failed');
+      }
+    } catch (err) {
+      alert('Erreur lors de la réservation. Veuillez réessayer.');
+      btn.textContent = 'Procéder au paiement';
+      btn.disabled = false;
+    }
+  });
+
+  renderCalendar();
+</script>
+
+<style is:global>
+  #calendarDays {
+    display: contents;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    cursor: default;
+    transition: var(--transition);
+    position: relative;
+    gap: 2px;
+  }
+  .cal-day--empty { visibility: hidden; }
+  .cal-day--available {
+    cursor: pointer;
+    background: var(--c-green-light);
+  }
+  .cal-day--available:hover {
+    background: var(--c-accent-light);
+    color: white;
+  }
+  .cal-day--blocked {
+    color: var(--c-text-light);
+    opacity: 0.4;
+    text-decoration: line-through;
+  }
+  .cal-day--checkin,
+  .cal-day--checkout {
+    background: var(--c-accent) !important;
+    color: white !important;
+  }
+  .cal-day--checkin .cal-day__price,
+  .cal-day--checkout .cal-day__price { color: rgba(255,255,255,.8); }
+  .cal-day--range {
+    background: rgba(139,111,78,.15) !important;
+  }
+  .cal-day__num {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+  }
+  .cal-day__price {
+    font-size: 0.65rem;
+    color: var(--c-text-light);
+  }
+</style>

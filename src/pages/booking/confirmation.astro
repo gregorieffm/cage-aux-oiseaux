@@ -1,0 +1,178 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Réservation confirmée — La Cage aux Oiseaux">
+  <Nav />
+
+  <main class="confirmation-page">
+    <div class="container">
+      <div class="confirmation-card" id="confirmationCard">
+        <div class="confirmation-loader" id="loader">
+          <div class="spinner"></div>
+          <p>Chargement de votre réservation...</p>
+        </div>
+
+        <div class="confirmation-content" id="confirmationContent" style="display:none">
+          <div class="confirmation-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+
+          <h1>Réservation enregistrée</h1>
+          <p class="confirmation-subtitle">Merci ! Votre demande de réservation a bien été reçue.</p>
+
+          <div class="confirmation-details" id="details"></div>
+
+          <p class="confirmation-notice">
+            Vous recevrez un email de confirmation à l'adresse indiquée.
+            Le paiement sera demandé lors de la prochaine étape.
+          </p>
+
+          <div class="confirmation-actions">
+            <a href="/" class="btn btn--primary">Retour à l'accueil</a>
+          </div>
+        </div>
+
+        <div class="confirmation-error" id="confirmationError" style="display:none">
+          <h1>Réservation introuvable</h1>
+          <p>Nous n'avons pas pu retrouver votre réservation. Veuillez réessayer ou nous contacter.</p>
+          <a href="/" class="btn btn--primary">Retour à l'accueil</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .confirmation-page {
+    padding-top: 120px;
+    padding-bottom: var(--space-3xl);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .confirmation-card {
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--c-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+  }
+  .confirmation-loader { padding: var(--space-2xl) 0; }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--c-cream);
+    border-top-color: var(--c-accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto var(--space-md);
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .confirmation-icon {
+    color: var(--c-green);
+    margin-bottom: var(--space-md);
+  }
+  .confirmation-content h1 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-2xl);
+    font-weight: 300;
+    margin-bottom: var(--space-xs);
+  }
+  .confirmation-subtitle {
+    color: var(--c-text-light);
+    margin-bottom: var(--space-lg);
+  }
+  .confirmation-details {
+    text-align: left;
+    background: var(--c-bg-warm);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+  .confirmation-details .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4em 0;
+    font-size: var(--fs-sm);
+  }
+  .confirmation-details .row span:first-child { color: var(--c-text-light); }
+  .confirmation-details .row strong { font-weight: 500; }
+  .confirmation-details hr {
+    border: none;
+    border-top: 1px solid var(--c-cream);
+    margin: var(--space-xs) 0;
+  }
+  .confirmation-notice {
+    font-size: var(--fs-sm);
+    color: var(--c-text-light);
+    margin-bottom: var(--space-lg);
+  }
+  .confirmation-actions { display: flex; gap: var(--space-sm); justify-content: center; }
+  .confirmation-error h1 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    font-weight: 400;
+    margin-bottom: var(--space-sm);
+    color: var(--c-accent);
+  }
+  .confirmation-error p {
+    color: var(--c-text-light);
+    margin-bottom: var(--space-lg);
+  }
+</style>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const bookingId = params.get('id');
+  const loader = document.getElementById('loader');
+  const content = document.getElementById('confirmationContent');
+  const error = document.getElementById('confirmationError');
+  const details = document.getElementById('details');
+
+  async function loadBooking() {
+    if (!bookingId) {
+      loader.style.display = 'none';
+      error.style.display = '';
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/bookings/${bookingId}`);
+      if (!res.ok) throw new Error('Not found');
+      const booking = await res.json();
+
+      const checkIn = new Date(booking.check_in).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+      const checkOut = new Date(booking.check_out).toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+      const nights = Math.round((new Date(booking.check_out) - new Date(booking.check_in)) / (1000 * 60 * 60 * 24));
+
+      details.innerHTML = `
+        <div class="row"><span>Hébergement</span><strong>${booking.property_name || '—'}</strong></div>
+        <div class="row"><span>Arrivée</span><strong>${checkIn}</strong></div>
+        <div class="row"><span>Départ</span><strong>${checkOut}</strong></div>
+        <div class="row"><span>Nuits</span><strong>${nights}</strong></div>
+        <hr/>
+        <div class="row"><span>Total</span><strong>${(booking.total_cents / 100).toFixed(0)} €</strong></div>
+      `;
+
+      loader.style.display = 'none';
+      content.style.display = '';
+    } catch {
+      loader.style.display = 'none';
+      error.style.display = '';
+    }
+  }
+
+  loadBooking();
+</script>
