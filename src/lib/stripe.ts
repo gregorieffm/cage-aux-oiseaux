@@ -7,7 +7,7 @@ if (!stripeSecretKey) {
 }
 
 export const stripe = stripeSecretKey
-  ? new Stripe(stripeSecretKey, { apiVersion: '2025-03-31.basil' })
+  ? new Stripe(stripeSecretKey)
   : null;
 
 export const STRIPE_WEBHOOK_SECRET = import.meta.env.STRIPE_WEBHOOK_SECRET || '';

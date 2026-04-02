@@ -133,8 +133,10 @@ export const POST: APIRoute = async ({ request }) => {
     );
   } catch (err) {
     console.error('Booking error:', err);
+    const message = err instanceof Error ? err.message : String(err);
+    const stack = err instanceof Error ? err.stack : undefined;
     return new Response(
-      JSON.stringify({ error: err instanceof Error ? err.message : 'Booking failed' }),
+      JSON.stringify({ error: message, detail: stack }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
