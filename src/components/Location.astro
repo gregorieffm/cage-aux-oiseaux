@@ -14,6 +14,14 @@ const loc = content.location;
         <ul class="location__nearby">
           {loc.nearby.map(n => <li>{n}</li>)}
         </ul>
+        <a
+          href="https://www.google.com/maps/dir/?api=1&destination=2+Chemin+des+Fleurs,+61320+La+Lande-de-Goult,+France"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--small location__btn"
+        >
+          Itinéraire Google Maps
+        </a>
       </div>
       <div class="split__media">
         <div class="map-container">
@@ -25,7 +33,7 @@ const loc = content.location;
             allowfullscreen
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="Domaine La Cage aux Oiseaux — 2 Chemin des Fleurs, 61320 La Lande-de-Goult"
+            title="Domaine La Cage aux Oiseaux"
           ></iframe>
         </div>
       </div>
@@ -41,7 +49,7 @@ const loc = content.location;
     color: var(--c-text-light);
     margin-bottom: var(--space-md);
   }
-  .location__nearby { margin-top: var(--space-sm); }
+  .location__nearby { margin-top: var(--space-sm); margin-bottom: var(--space-md); }
   .location__nearby li {
     font-size: var(--fs-sm);
     color: var(--c-text-light);
@@ -49,15 +57,17 @@ const loc = content.location;
     border-bottom: 1px solid var(--c-cream);
   }
   .location__nearby li:last-child { border: none; }
+  .location__btn { margin-top: var(--space-sm); }
   .map-container {
     width: 100%;
     height: 100%;
-    min-height: 400px;
+    min-height: 420px;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
+    border: 4px solid var(--c-white);
   }
   @media (max-width: 768px) {
-    .map-container { min-height: 300px; }
+    .map-container { min-height: 280px; }
   }
 </style>

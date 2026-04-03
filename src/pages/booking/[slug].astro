@@ -26,9 +26,16 @@ const p = property.data;
         <!-- Left: Property info + Calendar -->
         <div class="booking-main">
           {(p.image || p.gallery?.length > 0) ? (
-            <div class="gallery">
+            <div class="gallery" id="gallery">
               <div class="gallery__main">
                 <img src={p.image || p.gallery[0]} alt={p.name} id="galleryMain" class="gallery__img" loading="lazy" />
+                <button class="gallery__arrow gallery__arrow--prev" id="galleryPrev" aria-label="Photo précédente">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <button class="gallery__arrow gallery__arrow--next" id="galleryNext" aria-label="Photo suivante">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+                <span class="gallery__counter" id="galleryCounter"></span>
               </div>
               {p.gallery?.length > 0 && (
                 <div class="gallery__thumbs">
@@ -181,6 +188,7 @@ const p = property.data;
     overflow: hidden;
     aspect-ratio: 16/10;
     background: var(--c-bg-warm);
+    position: relative;
   }
   .gallery__img {
     width: 100%;
@@ -188,6 +196,39 @@ const p = property.data;
     object-fit: cover;
     display: block;
     transition: opacity 0.3s;
+  }
+  .gallery__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.85);
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 2;
+    color: var(--c-text);
+  }
+  .gallery__arrow:hover { background: white; transform: translateY(-50%) scale(1.05); }
+  .gallery__arrow--prev { left: 12px; }
+  .gallery__arrow--next { right: 12px; }
+  .gallery__counter {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    z-index: 2;
   }
   .gallery__thumbs {
     display: flex;
@@ -411,17 +452,49 @@ const p = property.data;
 </style>
 
 <script>
-  document.querySelectorAll('.gallery__thumb').forEach(thumb => {
-    thumb.addEventListener('click', () => {
-      const src = thumb.dataset.src;
-      const main = document.getElementById('galleryMain');
-      if (main && src) {
-        main.src = src;
-        document.querySelectorAll('.gallery__thumb').forEach(t => t.classList.remove('gallery__thumb--active'));
-        thumb.classList.add('gallery__thumb--active');
-      }
-    });
+  const thumbs = Array.from(document.querySelectorAll('.gallery__thumb'));
+  const mainImg = document.getElementById('galleryMain') as HTMLImageElement;
+  const counter = document.getElementById('galleryCounter');
+  const prevBtn = document.getElementById('galleryPrev');
+  const nextBtn = document.getElementById('galleryNext');
+  let currentIdx = 0;
+
+  function goTo(idx: number) {
+    if (thumbs.length === 0) return;
+    currentIdx = ((idx % thumbs.length) + thumbs.length) % thumbs.length;
+    const src = (thumbs[currentIdx] as HTMLElement).dataset.src;
+    if (mainImg && src) mainImg.src = src;
+    thumbs.forEach(t => t.classList.remove('gallery__thumb--active'));
+    thumbs[currentIdx].classList.add('gallery__thumb--active');
+    thumbs[currentIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    if (counter) counter.textContent = `${currentIdx + 1} / ${thumbs.length}`;
+  }
+
+  thumbs.forEach((thumb, i) => {
+    thumb.addEventListener('click', () => goTo(i));
   });
+
+  prevBtn?.addEventListener('click', () => goTo(currentIdx - 1));
+  nextBtn?.addEventListener('click', () => goTo(currentIdx + 1));
+
+  // Swipe support
+  let touchStartX = 0;
+  const gallery = document.getElementById('gallery');
+  gallery?.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  gallery?.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      goTo(diff > 0 ? currentIdx + 1 : currentIdx - 1);
+    }
+  }, { passive: true });
+
+  // Keyboard
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') goTo(currentIdx - 1);
+    if (e.key === 'ArrowRight') goTo(currentIdx + 1);
+  });
+
+  if (counter && thumbs.length > 0) counter.textContent = `1 / ${thumbs.length}`;
 </script>
 
 <script define:vars={{ propertySlug: p.slug, propertyId: p.slug }}>
