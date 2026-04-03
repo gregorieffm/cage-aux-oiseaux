@@ -13,12 +13,12 @@
     "WiFi gratuit"
   ],
   "price": "120 €",
-  "image": "/images/property/domaine-aerial.jpg",
+  "image": "/images/property/img-02.jpg",
   "gallery": [
-    "/images/property/img-02.jpg",
+    "/images/property/domaine-aerial.jpg",
     "/images/property/img-01.jpg",
-    "/images/property/img-06.jpg",
-    "/images/property/img-10.jpg"
+    "/images/property/img-10.jpg",
+    "/images/property/img-15.jpg"
   ],
   "icalFeeds": [],
   "seasonalPricing": [
