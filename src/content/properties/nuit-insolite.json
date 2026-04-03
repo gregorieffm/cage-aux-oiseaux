@@ -2,7 +2,7 @@
   "name": "Une Nuit Insolite",
   "slug": "nuit-insolite",
   "order": 2,
-  "featured": false,
+  "featured": true,
   "badge": "",
   "capacity": "2 personnes",
   "description": "Un refuge doux et atypique, pensé pour ceux qui cherchent une échappée hors du rythme quotidien — un cocon pour rêver autrement.",
