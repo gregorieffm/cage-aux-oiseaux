@@ -3,6 +3,7 @@
   "slug": "nuit-insolite",
   "order": 2,
   "featured": false,
+  "badge": "",
   "capacity": "2 personnes",
   "description": "Un refuge doux et atypique, pensé pour ceux qui cherchent une échappée hors du rythme quotidien — un cocon pour rêver autrement.",
   "features": [
@@ -13,7 +14,7 @@
     "2 sièges massant"
   ],
   "price": "180 €",
-  "image": "/images/property/nuit-bed.jpg",
+  "image": "/images/image (2).jpg",
   "gallery": [
     "/images/property/nuit-salon.jpg",
     "/images/property/nuit-bath.jpg",
@@ -22,8 +23,26 @@
   ],
   "icalFeeds": [],
   "seasonalPricing": [
-    { "label": "Basse saison", "startMonth": 11, "endMonth": 3, "pricePerNight": 180, "minNights": 1 },
-    { "label": "Moyenne saison", "startMonth": 4, "endMonth": 6, "pricePerNight": 200, "minNights": 2 },
-    { "label": "Haute saison", "startMonth": 7, "endMonth": 10, "pricePerNight": 230, "minNights": 2 }
+    {
+      "label": "Basse saison",
+      "startMonth": 11,
+      "endMonth": 3,
+      "pricePerNight": 180,
+      "minNights": 1
+    },
+    {
+      "label": "Moyenne saison",
+      "startMonth": 4,
+      "endMonth": 6,
+      "pricePerNight": 200,
+      "minNights": 2
+    },
+    {
+      "label": "Haute saison",
+      "startMonth": 7,
+      "endMonth": 10,
+      "pricePerNight": 230,
+      "minNights": 2
+    }
   ]
 }
