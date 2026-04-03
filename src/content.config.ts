@@ -15,6 +15,7 @@ const properties = defineCollection({
     price: z.string().optional(),
     priceNote: z.string().optional(),
     image: z.string().optional(),
+    gallery: z.array(z.string()).default([]),
     icalFeeds: z.array(z.object({
       platform: z.string(),
       url: z.string(),

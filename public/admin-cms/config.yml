@@ -146,7 +146,11 @@ collections:
         widget: list
         field: { label: Feature, name: feature, widget: string }
       - { label: "Prix affiché", name: price, widget: string, required: false }
-      - { label: Photo, name: image, widget: image, required: false }
+      - { label: "Photo principale", name: image, widget: image, required: false }
+      - label: "Galerie photos"
+        name: gallery
+        widget: list
+        field: { label: Photo, name: photo, widget: image }
 
   - name: extras
     label: "Options & Extras"
