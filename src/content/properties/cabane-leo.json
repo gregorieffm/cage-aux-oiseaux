@@ -2,7 +2,7 @@
   "name": "La Cabane de Léo",
   "slug": "cabane-leo",
   "order": 1,
-  "featured": true,
+  "featured": false,
   "badge": "Coup de coeur",
   "capacity": "2 personnes",
   "description": "Un lieu à part — une petite maison chaleureuse, posée dans un coin du domaine. Une cabane pour ralentir, respirer, retrouver ce plaisir simple d'ouvrir une porte en bois et de sentir que l'on entre dans un monde à soi : intime, doux, un peu magique.",
