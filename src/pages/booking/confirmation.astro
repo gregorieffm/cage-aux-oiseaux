@@ -200,6 +200,11 @@ import Footer from '../../components/Footer.astro';
         confirmTitle.textContent = 'Paiement non finalisé';
         confirmSubtitle.textContent = 'Votre réservation a été enregistrée mais le paiement n\'a pas abouti.';
         confirmNotice.textContent = 'Vous pouvez nous contacter pour finaliser votre réservation.';
+        fetch('/api/notify-cancelled', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ bookingId }),
+        }).catch(() => {});
       }
 
       const statusInfo = STATUS_LABELS[booking.status] || STATUS_LABELS.pending;
