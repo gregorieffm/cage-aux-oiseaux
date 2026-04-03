@@ -137,8 +137,8 @@ collections:
       - { label: Nom, name: name, widget: string }
       - { label: "Slug (URL)", name: slug, widget: string }
       - { label: "Ordre d'affichage", name: order, widget: number, value_type: int }
-      - { label: "Mise en avant", name: featured, widget: boolean, default: false }
-      - { label: Badge, name: badge, widget: string, required: false }
+      - { label: "Coup de coeur (mise en avant)", name: featured, widget: boolean, default: false, hint: "Activez pour afficher cet hébergement en grand sur la page d'accueil" }
+      - { label: "Badge affiché", name: badge, widget: string, required: false, hint: "Ex: Coup de coeur, Nouveau, Promo..." }
       - { label: Capacité, name: capacity, widget: string }
       - { label: Description, name: description, widget: text }
       - label: Caractéristiques
