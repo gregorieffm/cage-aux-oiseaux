@@ -14,6 +14,13 @@
   ],
   "price": "225 €",
   "image": "/images/wd3dzz1iehp0zi8hrlkd.jpg",
+  "gallery": [
+    "/images/property/img-04.jpg",
+    "/images/property/img-07.jpg",
+    "/images/property/img-21.jpg",
+    "/images/property/img-08.jpg",
+    "/images/property/img-13.jpg"
+  ],
   "icalFeeds": [],
   "seasonalPricing": [
     {

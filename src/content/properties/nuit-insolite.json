@@ -13,6 +13,13 @@
     "2 sièges massant"
   ],
   "price": "180 €",
+  "image": "/images/property/img-14.jpg",
+  "gallery": [
+    "/images/property/img-18.jpg",
+    "/images/property/img-20.jpg",
+    "/images/property/img-17.jpg",
+    "/images/property/img-08.jpg"
+  ],
   "icalFeeds": [],
   "seasonalPricing": [
     { "label": "Basse saison", "startMonth": 11, "endMonth": 3, "pricePerNight": 180, "minNights": 1 },

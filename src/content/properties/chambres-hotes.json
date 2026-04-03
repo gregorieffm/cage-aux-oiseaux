@@ -13,6 +13,13 @@
     "WiFi gratuit"
   ],
   "price": "120 €",
+  "image": "/images/property/img-02.jpg",
+  "gallery": [
+    "/images/property/img-01.jpg",
+    "/images/property/img-06.jpg",
+    "/images/property/img-10.jpg",
+    "/images/property/img-12.jpg"
+  ],
   "icalFeeds": [],
   "seasonalPricing": [
     { "label": "Basse saison", "startMonth": 11, "endMonth": 3, "pricePerNight": 120, "minNights": 1 },

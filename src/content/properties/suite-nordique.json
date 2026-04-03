@@ -13,6 +13,12 @@
     "Terrasse privée"
   ],
   "price": "190 €",
+  "image": "/images/property/img-03.jpg",
+  "gallery": [
+    "/images/property/img-16.jpg",
+    "/images/property/img-19.jpg",
+    "/images/property/img-07.jpg"
+  ],
   "icalFeeds": [],
   "seasonalPricing": [
     { "label": "Basse saison", "startMonth": 11, "endMonth": 3, "pricePerNight": 190, "minNights": 1 },
