@@ -16,11 +16,17 @@ const loc = content.location;
         </ul>
       </div>
       <div class="split__media">
-        <div class="map-placeholder">
-          <div class="map-placeholder__pin">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <p>La Lande-de-Goult, Orne</p>
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps?q=2+Chemin+des+Fleurs,+61320+La+Lande-de-Goult,+France&output=embed&hl=fr"
+            width="100%"
+            height="100%"
+            style="border:0;border-radius:var(--radius-lg)"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Domaine La Cage aux Oiseaux — 2 Chemin des Fleurs, 61320 La Lande-de-Goult"
+          ></iframe>
         </div>
       </div>
     </div>
@@ -43,4 +49,15 @@ const loc = content.location;
     border-bottom: 1px solid var(--c-cream);
   }
   .location__nearby li:last-child { border: none; }
+  .map-container {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  @media (max-width: 768px) {
+    .map-container { min-height: 300px; }
+  }
 </style>
