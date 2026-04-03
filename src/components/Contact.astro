@@ -37,9 +37,9 @@ const properties = allProperties.sort((a, b) => a.data.order - b.data.order);
         </div>
       </div>
       <div class="form__group">
-        <label for="hebergement">Hébergement</label>
+        <label for="hebergement">Expérience</label>
         <select id="hebergement" name="hebergement">
-          <option value="">— Choisir un hébergement —</option>
+          <option value="">— Choisir une expérience —</option>
           {properties.map(p => (
             <option value={p.data.slug}>{p.data.name}</option>
           ))}
