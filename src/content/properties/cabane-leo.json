@@ -15,11 +15,11 @@
   "price": "225 €",
   "image": "/images/property/img-11.jpg",
   "gallery": [
-    "/images/property/img-04.jpg",
-    "/images/property/img-07.jpg",
-    "/images/property/img-21.jpg",
-    "/images/property/img-08.jpg",
-    "/images/property/img-13.jpg"
+    "/images/property/cabane-ext1.jpg",
+    "/images/property/cabane-ext2.jpg",
+    "/images/property/cabane-int1.jpg",
+    "/images/property/cabane-int2.jpg",
+    "/images/property/spa-jacuzzi.jpg"
   ],
   "icalFeeds": [],
   "seasonalPricing": [

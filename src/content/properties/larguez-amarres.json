@@ -12,11 +12,12 @@
     "Coin cabine cosy"
   ],
   "price": "200 €",
-  "image": "/images/property/img-05.jpg",
+  "image": "/images/property/larguez-cabin1.jpg",
   "gallery": [
+    "/images/property/larguez-cabin2.jpg",
+    "/images/property/img-05.jpg",
     "/images/property/img-09.jpg",
-    "/images/property/img-22.jpg",
-    "/images/property/img-15.jpg"
+    "/images/property/spa-jacuzzi.jpg"
   ],
   "icalFeeds": [],
   "seasonalPricing": [
