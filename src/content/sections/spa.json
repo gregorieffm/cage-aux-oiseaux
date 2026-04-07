@@ -4,7 +4,6 @@
   "image": "/images/property/spa-jacuzzi.jpg",
   "gallery": [
     "/images/property/spa-nordic1.jpg",
-    "/images/property/spa-nordic2.jpg",
     "/images/property/img-07.jpg",
     "/images/property/img-08.jpg"
   ],
@@ -13,8 +12,19 @@
     "Un rituel simple : l'eau chaude, le ciel, le silence."
   ],
   "options": [
-    { "name": "Bain nordique privatif", "description": "Chauffé au poêle à bois, de 17h à 23h.", "price": "45 € / jour (min. 2 nuits)" },
-    { "name": "Sauna privatif", "description": "Accès illimité au sauna chauffé au poêle à bois, de 17h à 23h.", "price": "40 € / séance" },
-    { "name": "Jacuzzi extérieur", "description": "Ouvert toute l'année, sous les étoiles." }
+    {
+      "name": "Bain nordique privatif",
+      "description": "Chauffé au poêle à bois, de 17h à 23h.",
+      "price": "45 € / jour (min. 2 nuits)"
+    },
+    {
+      "name": "Sauna privatif",
+      "description": "Accès illimité au sauna chauffé au poêle à bois, de 17h à 23h.",
+      "price": "40 € / séance"
+    },
+    {
+      "name": "Jacuzzi extérieur",
+      "description": "Ouvert toute l'année, sous les étoiles."
+    }
   ]
 }
