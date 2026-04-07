@@ -1,38 +1,4 @@
 {
   "label": "Ailleurs en France",
-  "title": "Les gîtes",
-  "items": [
-    {
-      "name": "La Maison de Coco",
-      "location": "Auvergne",
-      "type": "Maison 8 personnes",
-      "description": "Une maison de caractère dans le Parc naturel des Volcans d'Auvergne — 3 chambres, 120 m², terrasse, jardin. Idéale pour les séjours en famille ou entre amis.",
-      "image": "/images/property/gite-maison-ext.jpg",
-      "url": ""
-    },
-    {
-      "name": "Le Loft de Coco",
-      "location": "St Malo",
-      "type": "Appartement 6 personnes",
-      "description": "Un loft lumineux et contemporain au cœur de Saint-Malo — espace ouvert, décoration soignée, à deux pas des remparts et de la plage.",
-      "image": "",
-      "url": ""
-    },
-    {
-      "name": "ValCoco",
-      "location": "Val d'Isère",
-      "type": "Appartement 6 personnes",
-      "description": "Un appartement au pied des pistes dans la station mythique de Val d'Isère — vue sur les montagnes, accès direct aux remontées mécaniques.",
-      "image": "",
-      "url": ""
-    },
-    {
-      "name": "Chez Coco",
-      "location": "Auvergne",
-      "type": "Studio 2 personnes",
-      "description": "Un studio cosy près de la cure thermale — parfait pour un séjour bien-être en duo au cœur de l'Auvergne.",
-      "image": "",
-      "url": ""
-    }
-  ]
+  "title": "Les gîtes"
 }

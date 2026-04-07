@@ -119,21 +119,11 @@ collections:
           - { label: "Lien Facebook", name: facebook, widget: string, required: false }
 
       - name: gites
-        label: "Gîtes ailleurs en France"
+        label: "Section Gîtes (titre)"
         file: src/content/sections/gites.json
         fields:
           - { label: Label, name: label, widget: string }
           - { label: Titre, name: title, widget: string }
-          - label: Gîtes
-            name: items
-            widget: list
-            fields:
-              - { label: Nom, name: name, widget: string }
-              - { label: Localisation, name: location, widget: string }
-              - { label: Type, name: type, widget: string, hint: "Ex: Maison 8 personnes, Appartement 6 personnes..." }
-              - { label: Description, name: description, widget: text }
-              - { label: Photo, name: image, widget: image, required: false }
-              - { label: "Lien externe", name: url, widget: string, required: false, hint: "URL vers le site de réservation" }
 
       - name: location
         label: "Localisation"
@@ -151,7 +141,7 @@ collections:
             field: { label: Lieu, name: place, widget: string }
 
   - name: properties
-    label: "Hébergements"
+    label: "Hébergements & Gîtes"
     folder: src/content/properties
     format: json
     create: true
@@ -160,6 +150,7 @@ collections:
       - { label: Nom, name: name, widget: string }
       - { label: "Slug (URL)", name: slug, widget: string }
       - { label: "Ordre d'affichage", name: order, widget: number, value_type: int }
+      - { label: Catégorie, name: category, widget: select, options: [{label: "Chambre d'hôtes", value: chambre}, {label: "Gîte", value: gite}], default: chambre }
       - { label: "Coup de coeur (mise en avant)", name: featured, widget: boolean, default: false, hint: "Activez pour afficher cet hébergement en grand sur la page d'accueil" }
       - { label: "Badge affiché", name: badge, widget: string, required: false, hint: "Ex: Coup de coeur, Nouveau, Promo..." }
       - { label: Capacité, name: capacity, widget: string }

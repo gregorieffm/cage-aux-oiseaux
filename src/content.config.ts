@@ -7,6 +7,7 @@ const properties = defineCollection({
     name: z.string(),
     slug: z.string(),
     order: z.number(),
+    category: z.enum(['chambre', 'gite']).default('chambre'),
     featured: z.boolean().default(false),
     badge: z.string().optional(),
     capacity: z.string(),

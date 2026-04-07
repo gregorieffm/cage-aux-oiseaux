@@ -1,0 +1,20 @@
+{
+  "name": "ValCoco",
+  "slug": "valcoco",
+  "order": 12,
+  "category": "gite",
+  "featured": false,
+  "capacity": "6 personnes",
+  "description": "Un appartement au pied des pistes dans la station mythique de Val d'Isère — vue sur les montagnes, accès direct aux remontées mécaniques.",
+  "features": [
+    "Pied des pistes",
+    "Val d'Isère",
+    "Vue montagne",
+    "WiFi gratuit"
+  ],
+  "price": "",
+  "image": "",
+  "gallery": [],
+  "icalFeeds": [],
+  "seasonalPricing": []
+}

@@ -4,6 +4,7 @@ import RoomCard from './RoomCard.astro';
 
 const allProperties = await getCollection('properties');
 const rooms = allProperties
+  .filter(p => (p.data.category || 'chambre') === 'chambre')
   .sort((a, b) => {
     if (a.data.featured && !b.data.featured) return -1;
     if (!a.data.featured && b.data.featured) return 1;

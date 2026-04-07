@@ -1,0 +1,22 @@
+{
+  "name": "Chez Coco",
+  "slug": "chez-coco",
+  "order": 13,
+  "category": "gite",
+  "featured": false,
+  "capacity": "2 personnes",
+  "description": "Un studio cosy près de la cure thermale — parfait pour un séjour bien-être en duo au cœur de l'Auvergne.",
+  "features": [
+    "Studio cosy — 27 m²",
+    "Proche cure thermale",
+    "Centre-ville",
+    "WiFi gratuit"
+  ],
+  "price": "50 €",
+  "image": "",
+  "gallery": [],
+  "icalFeeds": [],
+  "seasonalPricing": [
+    { "label": "Toute l'année", "startMonth": 1, "endMonth": 12, "pricePerNight": 50, "minNights": 1 }
+  ]
+}

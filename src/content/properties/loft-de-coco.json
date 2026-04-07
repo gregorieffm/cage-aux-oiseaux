@@ -1,0 +1,20 @@
+{
+  "name": "Le Loft de Coco",
+  "slug": "loft-de-coco",
+  "order": 11,
+  "category": "gite",
+  "featured": false,
+  "capacity": "6 personnes",
+  "description": "Un loft lumineux et contemporain au cœur de Saint-Malo — espace ouvert, décoration soignée, à deux pas des remparts et de la plage.",
+  "features": [
+    "Loft contemporain",
+    "Centre de St Malo",
+    "Proche plage & remparts",
+    "WiFi gratuit"
+  ],
+  "price": "",
+  "image": "",
+  "gallery": [],
+  "icalFeeds": [],
+  "seasonalPricing": []
+}
