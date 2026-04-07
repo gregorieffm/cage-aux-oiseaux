@@ -1,10 +1,20 @@
 {
   "label": "Expériences",
   "title": "Stages de céramique",
-  "image": "/images/property/general-interior2.jpg",
+  "image": "/images/image (4).jpg",
   "description": "Des stages pour débutants et confirmés, pour découvrir le travail de la terre dans un cadre inspirant. Le matin, on aborde la technique du colombin, de la plaque, du bol. L'après-midi amène vers des créations plus personnalisées.",
   "formulas": [
-    { "name": "Journée complète", "hours": "10h — 17h", "price": "80 €", "note": "Terre & cuisson comprises" },
-    { "name": "Demi-journée", "hours": "10h — 13h", "price": "50 €", "note": "Terre & cuisson comprises" }
+    {
+      "name": "Journée complète",
+      "hours": "10h — 17h",
+      "price": "80 €",
+      "note": "Terre & cuisson comprises"
+    },
+    {
+      "name": "Demi-journée",
+      "hours": "10h — 13h",
+      "price": "50 €",
+      "note": "Terre & cuisson comprises"
+    }
   ]
 }
