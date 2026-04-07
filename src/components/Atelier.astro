@@ -13,22 +13,20 @@ const a = content.atelier;
     </div>
 
     <div class="atelier__grid">
-      <div class="atelier__item">
-        <img src="/images/property/general-garden1.jpg" alt="Sculptures en grès" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg)" loading="lazy" />
-      </div>
-      <div class="atelier__item">
-        <img src="/images/property/general-garden2.jpg" alt="Bols & céramiques" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg)" loading="lazy" />
-      </div>
+      {(a.images || []).slice(0, 2).map((img, i) => (
+        <div class="atelier__item">
+          <img src={img} alt={`${a.title} — photo ${i+1}`} style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg)" loading="lazy" />
+        </div>
+      ))}
       <div class="atelier__item atelier__item--text">
         <h3>Un lieu vivant</h3>
         {a.galleryText.map(p => <p>{p}</p>)}
       </div>
-      <div class="atelier__item">
-        <img src="/images/property/general-interior1.jpg" alt="Déco de jardin" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg)" loading="lazy" />
-      </div>
-      <div class="atelier__item">
-        <img src="/images/property/img-11.jpg" alt="L'atelier" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg)" loading="lazy" />
-      </div>
+      {(a.images || []).slice(2, 4).map((img, i) => (
+        <div class="atelier__item">
+          <img src={img} alt={`${a.title} — photo ${i+3}`} style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg)" loading="lazy" />
+        </div>
+      ))}
     </div>
 
     <div class="atelier__deco">

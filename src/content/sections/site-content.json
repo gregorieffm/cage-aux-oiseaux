@@ -17,6 +17,13 @@
   "spa": {
     "label": "Bien-être",
     "title": "Spa privatif & bains nordiques",
+    "image": "/images/property/spa-jacuzzi.jpg",
+    "gallery": [
+      "/images/property/spa-nordic1.jpg",
+      "/images/property/spa-nordic2.jpg",
+      "/images/property/img-07.jpg",
+      "/images/property/img-08.jpg"
+    ],
     "paragraphs": [
       "Pour prolonger la parenthèse, le domaine propose des espaces bien-être privatifs : bains nordiques chauffés au feu de bois, jacuzzi extérieur ouvert toute l'année, sauna privatif et sièges massant.",
       "Un rituel simple : l'eau chaude, le ciel, le silence."
@@ -30,6 +37,12 @@
   "atelier": {
     "label": "Art & Terre",
     "title": "L'Atelier & la Galerie",
+    "images": [
+      "/images/property/general-garden1.jpg",
+      "/images/property/general-garden2.jpg",
+      "/images/property/general-interior1.jpg",
+      "/images/property/img-11.jpg"
+    ],
     "intro": "La galerie du domaine présente les créations en grès, terre cuite et sculptures de Coco Eugène Lacroix. Un espace où la terre raconte des histoires, avec des pièces façonnées à la main — bols, sculptures, formes organiques inspirées de la nature.",
     "galleryText": [
       "La galerie est ouverte sur rendez-vous, pour prendre le temps d'échanger, de comprendre la démarche et de toucher la terre. Ce n'est pas une boutique classique : c'est un lieu vivant, chaleureux, où la création se dévoile simplement.",
@@ -41,6 +54,7 @@
   "stages": {
     "label": "Expériences",
     "title": "Stages de céramique",
+    "image": "/images/property/general-interior2.jpg",
     "description": "Des stages pour débutants et confirmés, pour découvrir le travail de la terre dans un cadre inspirant. Le matin, on aborde la technique du colombin, de la plaque, du bol. L'après-midi amène vers des créations plus personnalisées.",
     "formulas": [
       { "name": "Journée complète", "hours": "10h — 17h", "price": "80 €", "note": "Terre & cuisson comprises" },

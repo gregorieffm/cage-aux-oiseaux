@@ -8,7 +8,10 @@ const s = content.stages;
   <div class="container">
     <div class="split split--reverse">
       <div class="split__media">
-        <img src="/images/property/general-interior2.jpg" alt="Stage de céramique" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg);min-height:400px" loading="lazy" />
+        {s.image
+          ? <img src={s.image} alt={s.title} style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg);min-height:400px" loading="lazy" />
+          : <div class="img-placeholder img-placeholder--tall" data-label="Stage céramique"></div>
+        }
       </div>
       <div class="split__text">
         <span class="section__label">{s.label}</span>

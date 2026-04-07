@@ -47,6 +47,8 @@ const sections = defineCollection({
     spa: z.object({
       label: z.string(),
       title: z.string(),
+      image: z.string().optional(),
+      gallery: z.array(z.string()).default([]),
       paragraphs: z.array(z.string()),
       options: z.array(z.object({
         name: z.string(),
@@ -57,6 +59,7 @@ const sections = defineCollection({
     atelier: z.object({
       label: z.string(),
       title: z.string(),
+      images: z.array(z.string()).default([]),
       intro: z.string(),
       galleryText: z.array(z.string()),
       decoTitle: z.string(),
@@ -64,6 +67,7 @@ const sections = defineCollection({
     }),
     stages: z.object({
       label: z.string(),
+      image: z.string().optional(),
       title: z.string(),
       description: z.string(),
       formulas: z.array(z.object({
