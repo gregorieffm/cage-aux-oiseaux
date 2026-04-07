@@ -1,4 +1,5 @@
 {
   "label": "Ailleurs en France",
-  "title": "Les gîtes"
+  "title": "Les gîtes",
+  "visible": true
 }

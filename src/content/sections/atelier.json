@@ -10,5 +10,6 @@
     "Il est possible d'acheter une pièce sur place, ou d'offrir un bon cadeau pour une journée découverte."
   ],
   "decoTitle": "Décoration de jardin",
-  "decoDescription": "Pommes et boules en grès et porcelaine à suspendre dans les arbres — de 25 à 45 €"
+  "decoDescription": "Pommes et boules en grès et porcelaine à suspendre dans les arbres — de 25 à 45 €",
+  "visible": true
 }

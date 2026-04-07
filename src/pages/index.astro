@@ -1,9 +1,9 @@
 ---
+import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import Domaine from '../components/Domaine.astro';
-
 import Rooms from '../components/Rooms.astro';
 import Spa from '../components/Spa.astro';
 import Atelier from '../components/Atelier.astro';
@@ -14,21 +14,39 @@ import Reviews from '../components/Reviews.astro';
 import Location from '../components/Location.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+
+const v = async (name: string) => {
+  try {
+    const { data } = await getEntry('sections', name);
+    return data?.visible !== false;
+  } catch { return true; }
+};
+
+const show = {
+  domaine: await v('domaine'),
+  spa: await v('spa'),
+  atelier: await v('atelier'),
+  stages: await v('stages'),
+  gites: await v('gites'),
+  reviews: await v('reviews'),
+  contact: await v('contact'),
+  location: await v('location'),
+};
 ---
 
 <Layout>
-  <Nav />
+  <Nav show={show} />
   <Hero />
-  <Domaine />
+  {show.domaine && <Domaine />}
   <Rooms />
-  <Spa />
+  {show.spa && <Spa />}
   <Tarifs />
-  <Atelier />
-  <Stages />
-  <Gites />
-  <Reviews />
-  <Location />
-  <Contact />
+  {show.atelier && <Atelier />}
+  {show.stages && <Stages />}
+  {show.gites && <Gites />}
+  {show.reviews && <Reviews />}
+  {show.location && <Location />}
+  {show.contact && <Contact />}
   <Footer />
 </Layout>
 

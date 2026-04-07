@@ -1,13 +1,20 @@
 ---
-const links = [
-  { href: '#domaine', label: 'Le Domaine' },
-  { href: '#hebergements', label: 'Hébergements' },
-  { href: '#spa', label: 'Bien-être' },
-  { href: '#tarifs', label: 'Options' },
-  { href: '#atelier', label: 'Atelier & Galerie' },
-  { href: '#stages', label: 'Stages' },
-  { href: '#gites', label: 'Les Gîtes' },
+interface Props {
+  show?: Record<string, boolean>;
+}
+const { show = {} } = Astro.props;
+
+const allLinks = [
+  { href: '#domaine', label: 'Le Domaine', key: 'domaine' },
+  { href: '#hebergements', label: 'Hébergements', key: null },
+  { href: '#spa', label: 'Bien-être', key: 'spa' },
+  { href: '#tarifs', label: 'Options', key: null },
+  { href: '#atelier', label: 'Atelier & Galerie', key: 'atelier' },
+  { href: '#stages', label: 'Stages', key: 'stages' },
+  { href: '#gites', label: 'Les Gîtes', key: 'gites' },
 ];
+
+const links = allLinks.filter(l => !l.key || show[l.key] !== false);
 ---
 
 <nav class="nav" id="nav">

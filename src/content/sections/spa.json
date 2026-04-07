@@ -26,5 +26,6 @@
       "name": "Jacuzzi extérieur",
       "description": "Ouvert toute l'année, sous les étoiles."
     }
-  ]
+  ],
+  "visible": true
 }

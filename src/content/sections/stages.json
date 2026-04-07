@@ -16,5 +16,6 @@
       "price": "50 €",
       "note": "Terre & cuisson comprises"
     }
-  ]
+  ],
+  "visible": false
 }

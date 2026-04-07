@@ -14,6 +14,7 @@ collections:
         label: "Accueil — Bannière"
         file: src/content/sections/hero.json
         fields:
+          - { label: "Section visible", name: visible, widget: boolean, default: true, hint: "Désactivez pour masquer cette section du site" }
           - { label: Sous-titre, name: subtitle, widget: string }
           - { label: Titre principal, name: title, widget: string }
           - { label: Accroche, name: tagline, widget: text }
@@ -23,6 +24,7 @@ collections:
         label: "Le Domaine"
         file: src/content/sections/domaine.json
         fields:
+          - { label: "Section visible", name: visible, widget: boolean, default: true, hint: "Désactivez pour masquer cette section du site" }
           - { label: Label, name: label, widget: string }
           - { label: Titre, name: title, widget: string }
           - label: Paragraphes
@@ -34,6 +36,7 @@ collections:
         label: "Spa & Bien-être"
         file: src/content/sections/spa.json
         fields:
+          - { label: "Section visible", name: visible, widget: boolean, default: true, hint: "Désactivez pour masquer cette section du site" }
           - { label: Label, name: label, widget: string }
           - { label: Titre, name: title, widget: string }
           - { label: "Photo principale", name: image, widget: image, required: false }
@@ -57,6 +60,7 @@ collections:
         label: "Atelier & Galerie"
         file: src/content/sections/atelier.json
         fields:
+          - { label: "Section visible", name: visible, widget: boolean, default: true, hint: "Désactivez pour masquer cette section du site" }
           - { label: Label, name: label, widget: string }
           - { label: Titre, name: title, widget: string }
           - label: "Photos (4 images)"
@@ -75,6 +79,7 @@ collections:
         label: "Stages de céramique"
         file: src/content/sections/stages.json
         fields:
+          - { label: "Section visible", name: visible, widget: boolean, default: true, hint: "Désactivez pour masquer cette section du site" }
           - { label: Label, name: label, widget: string }
           - { label: Titre, name: title, widget: string }
           - { label: Photo, name: image, widget: image, required: false }
@@ -92,6 +97,7 @@ collections:
         label: "Avis clients"
         file: src/content/sections/reviews.json
         fields:
+          - { label: "Section visible", name: visible, widget: boolean, default: true, hint: "Désactivez pour masquer cette section du site" }
           - { label: Label, name: label, widget: string }
           - { label: Titre, name: title, widget: string }
           - { label: Sous-titre, name: subtitle, widget: string }
@@ -107,6 +113,7 @@ collections:
         label: "Contact & Localisation"
         file: src/content/sections/contact.json
         fields:
+          - { label: "Section visible", name: visible, widget: boolean, default: true, hint: "Désactivez pour masquer cette section du site" }
           - { label: Label, name: label, widget: string }
           - { label: Titre, name: title, widget: string }
           - { label: Introduction, name: intro, widget: text }
@@ -122,6 +129,7 @@ collections:
         label: "Section Gîtes (titre)"
         file: src/content/sections/gites.json
         fields:
+          - { label: "Section visible", name: visible, widget: boolean, default: true, hint: "Désactivez pour masquer cette section du site" }
           - { label: Label, name: label, widget: string }
           - { label: Titre, name: title, widget: string }
 
@@ -129,6 +137,7 @@ collections:
         label: "Localisation"
         file: src/content/sections/location.json
         fields:
+          - { label: "Section visible", name: visible, widget: boolean, default: true, hint: "Désactivez pour masquer cette section du site" }
           - { label: Label, name: label, widget: string }
           - { label: Titre, name: title, widget: string }
           - label: Adresse
