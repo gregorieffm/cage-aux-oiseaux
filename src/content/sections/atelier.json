@@ -1,0 +1,17 @@
+{
+  "label": "Art & Terre",
+  "title": "L'Atelier & la Galerie",
+  "images": [
+    "/images/property/general-garden1.jpg",
+    "/images/property/general-garden2.jpg",
+    "/images/property/general-interior1.jpg",
+    "/images/property/img-11.jpg"
+  ],
+  "intro": "La galerie du domaine présente les créations en grès, terre cuite et sculptures de Coco Eugène Lacroix. Un espace où la terre raconte des histoires, avec des pièces façonnées à la main — bols, sculptures, formes organiques inspirées de la nature.",
+  "galleryText": [
+    "La galerie est ouverte sur rendez-vous, pour prendre le temps d'échanger, de comprendre la démarche et de toucher la terre. Ce n'est pas une boutique classique : c'est un lieu vivant, chaleureux, où la création se dévoile simplement.",
+    "Il est possible d'acheter une pièce sur place, ou d'offrir un bon cadeau pour une journée découverte."
+  ],
+  "decoTitle": "Décoration de jardin",
+  "decoDescription": "Pommes et boules en grès et porcelaine à suspendre dans les arbres — de 25 à 45 €"
+}

@@ -1,7 +1,6 @@
 ---
 import { getEntry } from 'astro:content';
-const { data: content } = await getEntry('sections', 'site-content');
-const a = content.atelier;
+const { data: a } = await getEntry('sections', 'atelier');
 ---
 
 <section class="section atelier" id="atelier">

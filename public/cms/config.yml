@@ -12,201 +12,126 @@ collections:
     files:
       - name: hero
         label: "Accueil — Bannière"
-        file: src/content/sections/site-content.json
+        file: src/content/sections/hero.json
         fields:
-          - label: "Accueil (Hero)"
-            name: hero
-            widget: object
-            fields:
-              - { label: Sous-titre, name: subtitle, widget: string }
-              - { label: Titre principal, name: title, widget: string }
-              - { label: Accroche, name: tagline, widget: text }
-              - { label: "Bouton (texte)", name: cta, widget: string }
-          - { label: domaine, name: domaine, widget: hidden }
-          - { label: spa, name: spa, widget: hidden }
-          - { label: atelier, name: atelier, widget: hidden }
-          - { label: stages, name: stages, widget: hidden }
-          - { label: reviews, name: reviews, widget: hidden }
-          - { label: contact, name: contact, widget: hidden }
-          - { label: location, name: location, widget: hidden }
+          - { label: Sous-titre, name: subtitle, widget: string }
+          - { label: Titre principal, name: title, widget: string }
+          - { label: Accroche, name: tagline, widget: text }
+          - { label: "Bouton (texte)", name: cta, widget: string }
 
       - name: domaine
         label: "Le Domaine"
-        file: src/content/sections/site-content.json
+        file: src/content/sections/domaine.json
         fields:
-          - { label: hero, name: hero, widget: hidden }
-          - label: "Le Domaine"
-            name: domaine
-            widget: object
-            fields:
-              - { label: Label, name: label, widget: string }
-              - { label: Titre, name: title, widget: string }
-              - label: Paragraphes
-                name: paragraphs
-                widget: list
-                field: { label: Paragraphe, name: paragraph, widget: text }
-          - { label: spa, name: spa, widget: hidden }
-          - { label: atelier, name: atelier, widget: hidden }
-          - { label: stages, name: stages, widget: hidden }
-          - { label: reviews, name: reviews, widget: hidden }
-          - { label: contact, name: contact, widget: hidden }
-          - { label: location, name: location, widget: hidden }
+          - { label: Label, name: label, widget: string }
+          - { label: Titre, name: title, widget: string }
+          - label: Paragraphes
+            name: paragraphs
+            widget: list
+            field: { label: Paragraphe, name: paragraph, widget: text }
 
       - name: spa
         label: "Spa & Bien-être"
-        file: src/content/sections/site-content.json
+        file: src/content/sections/spa.json
         fields:
-          - { label: hero, name: hero, widget: hidden }
-          - { label: domaine, name: domaine, widget: hidden }
-          - label: "Spa & Bien-être"
-            name: spa
-            widget: object
+          - { label: Label, name: label, widget: string }
+          - { label: Titre, name: title, widget: string }
+          - { label: "Photo principale", name: image, widget: image, required: false }
+          - label: "Galerie photos"
+            name: gallery
+            widget: list
+            field: { label: Photo, name: photo, widget: image }
+          - label: Paragraphes
+            name: paragraphs
+            widget: list
+            field: { label: Paragraphe, name: paragraph, widget: text }
+          - label: "Options bien-être"
+            name: options
+            widget: list
             fields:
-              - { label: Label, name: label, widget: string }
-              - { label: Titre, name: title, widget: string }
-              - { label: "Photo principale", name: image, widget: image, required: false }
-              - label: "Galerie photos"
-                name: gallery
-                widget: list
-                field: { label: Photo, name: photo, widget: image }
-              - label: Paragraphes
-                name: paragraphs
-                widget: list
-                field: { label: Paragraphe, name: paragraph, widget: text }
-              - label: "Options bien-être"
-                name: options
-                widget: list
-                fields:
-                  - { label: Nom, name: name, widget: string }
-                  - { label: Description, name: description, widget: string }
-                  - { label: Tarif, name: price, widget: string, required: false }
-          - { label: atelier, name: atelier, widget: hidden }
-          - { label: stages, name: stages, widget: hidden }
-          - { label: reviews, name: reviews, widget: hidden }
-          - { label: contact, name: contact, widget: hidden }
-          - { label: location, name: location, widget: hidden }
+              - { label: Nom, name: name, widget: string }
+              - { label: Description, name: description, widget: string }
+              - { label: Tarif, name: price, widget: string, required: false }
 
       - name: atelier
         label: "Atelier & Galerie"
-        file: src/content/sections/site-content.json
+        file: src/content/sections/atelier.json
         fields:
-          - { label: hero, name: hero, widget: hidden }
-          - { label: domaine, name: domaine, widget: hidden }
-          - { label: spa, name: spa, widget: hidden }
-          - label: "Atelier & Galerie"
-            name: atelier
-            widget: object
-            fields:
-              - { label: Label, name: label, widget: string }
-              - { label: Titre, name: title, widget: string }
-              - label: "Photos (4 images)"
-                name: images
-                widget: list
-                field: { label: Photo, name: photo, widget: image }
-              - { label: Introduction, name: intro, widget: text }
-              - label: "Texte galerie"
-                name: galleryText
-                widget: list
-                field: { label: Paragraphe, name: paragraph, widget: text }
-              - { label: "Titre déco", name: decoTitle, widget: string }
-              - { label: "Description déco", name: decoDescription, widget: string }
-          - { label: stages, name: stages, widget: hidden }
-          - { label: reviews, name: reviews, widget: hidden }
-          - { label: contact, name: contact, widget: hidden }
-          - { label: location, name: location, widget: hidden }
+          - { label: Label, name: label, widget: string }
+          - { label: Titre, name: title, widget: string }
+          - label: "Photos (4 images)"
+            name: images
+            widget: list
+            field: { label: Photo, name: photo, widget: image }
+          - { label: Introduction, name: intro, widget: text }
+          - label: "Texte galerie"
+            name: galleryText
+            widget: list
+            field: { label: Paragraphe, name: paragraph, widget: text }
+          - { label: "Titre déco", name: decoTitle, widget: string }
+          - { label: "Description déco", name: decoDescription, widget: string }
 
       - name: stages
         label: "Stages de céramique"
-        file: src/content/sections/site-content.json
+        file: src/content/sections/stages.json
         fields:
-          - { label: hero, name: hero, widget: hidden }
-          - { label: domaine, name: domaine, widget: hidden }
-          - { label: spa, name: spa, widget: hidden }
-          - { label: atelier, name: atelier, widget: hidden }
-          - label: "Stages de céramique"
-            name: stages
-            widget: object
+          - { label: Label, name: label, widget: string }
+          - { label: Titre, name: title, widget: string }
+          - { label: Photo, name: image, widget: image, required: false }
+          - { label: Description, name: description, widget: text }
+          - label: Formules
+            name: formulas
+            widget: list
             fields:
-              - { label: Label, name: label, widget: string }
-              - { label: Titre, name: title, widget: string }
-              - { label: Photo, name: image, widget: image, required: false }
-              - { label: Description, name: description, widget: text }
-              - label: Formules
-                name: formulas
-                widget: list
-                fields:
-                  - { label: Nom, name: name, widget: string }
-                  - { label: Horaires, name: hours, widget: string }
-                  - { label: Prix, name: price, widget: string }
-                  - { label: Note, name: note, widget: string }
-          - { label: reviews, name: reviews, widget: hidden }
-          - { label: contact, name: contact, widget: hidden }
-          - { label: location, name: location, widget: hidden }
+              - { label: Nom, name: name, widget: string }
+              - { label: Horaires, name: hours, widget: string }
+              - { label: Prix, name: price, widget: string }
+              - { label: Note, name: note, widget: string }
 
       - name: reviews
         label: "Avis clients"
-        file: src/content/sections/site-content.json
+        file: src/content/sections/reviews.json
         fields:
-          - { label: hero, name: hero, widget: hidden }
-          - { label: domaine, name: domaine, widget: hidden }
-          - { label: spa, name: spa, widget: hidden }
-          - { label: atelier, name: atelier, widget: hidden }
-          - { label: stages, name: stages, widget: hidden }
-          - label: "Avis clients"
-            name: reviews
-            widget: object
+          - { label: Label, name: label, widget: string }
+          - { label: Titre, name: title, widget: string }
+          - { label: Sous-titre, name: subtitle, widget: string }
+          - label: Avis
+            name: items
+            widget: list
             fields:
-              - { label: Label, name: label, widget: string }
-              - { label: Titre, name: title, widget: string }
-              - { label: Sous-titre, name: subtitle, widget: string }
-              - label: Avis
-                name: items
-                widget: list
-                fields:
-                  - { label: Texte, name: text, widget: text }
-                  - { label: Auteur, name: author, widget: string }
-                  - { label: "Note (1-5)", name: rating, widget: number, value_type: int, min: 1, max: 5 }
-          - { label: contact, name: contact, widget: hidden }
-          - { label: location, name: location, widget: hidden }
+              - { label: Texte, name: text, widget: text }
+              - { label: Auteur, name: author, widget: string }
+              - { label: "Note (1-5)", name: rating, widget: number, value_type: int, min: 1, max: 5 }
 
       - name: contact
-        label: "Contact"
-        file: src/content/sections/site-content.json
+        label: "Contact & Localisation"
+        file: src/content/sections/contact.json
         fields:
-          - { label: hero, name: hero, widget: hidden }
-          - { label: domaine, name: domaine, widget: hidden }
-          - { label: spa, name: spa, widget: hidden }
-          - { label: atelier, name: atelier, widget: hidden }
-          - { label: stages, name: stages, widget: hidden }
-          - { label: reviews, name: reviews, widget: hidden }
-          - label: "Contact"
-            name: contact
-            widget: object
-            fields:
-              - { label: Label, name: label, widget: string }
-              - { label: Titre, name: title, widget: string }
-              - { label: Introduction, name: intro, widget: text }
-              - label: Adresse
-                name: address
-                widget: list
-                field: { label: Ligne, name: line, widget: string }
-              - { label: Téléphone, name: phone, widget: string, required: false }
-              - { label: Email, name: email, widget: string, required: false }
-              - { label: "Lien Facebook", name: facebook, widget: string, required: false }
-          - label: "Localisation"
-            name: location
-            widget: object
-            fields:
-              - { label: Label, name: label, widget: string }
-              - { label: Titre, name: title, widget: string }
-              - label: Adresse
-                name: address
-                widget: list
-                field: { label: Ligne, name: line, widget: string }
-              - label: "À proximité"
-                name: nearby
-                widget: list
-                field: { label: Lieu, name: place, widget: string }
+          - { label: Label, name: label, widget: string }
+          - { label: Titre, name: title, widget: string }
+          - { label: Introduction, name: intro, widget: text }
+          - label: Adresse
+            name: address
+            widget: list
+            field: { label: Ligne, name: line, widget: string }
+          - { label: Téléphone, name: phone, widget: string, required: false }
+          - { label: Email, name: email, widget: string, required: false }
+          - { label: "Lien Facebook", name: facebook, widget: string, required: false }
+
+      - name: location
+        label: "Localisation"
+        file: src/content/sections/location.json
+        fields:
+          - { label: Label, name: label, widget: string }
+          - { label: Titre, name: title, widget: string }
+          - label: Adresse
+            name: address
+            widget: list
+            field: { label: Ligne, name: line, widget: string }
+          - label: "À proximité"
+            name: nearby
+            widget: list
+            field: { label: Lieu, name: place, widget: string }
 
   - name: properties
     label: "Hébergements"

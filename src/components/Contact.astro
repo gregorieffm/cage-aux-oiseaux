@@ -1,7 +1,6 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-const { data: content } = await getEntry('sections', 'site-content');
-const c = content.contact;
+const { data: c } = await getEntry('sections', 'contact');
 
 const allProperties = await getCollection('properties');
 const properties = allProperties.sort((a, b) => a.data.order - b.data.order);

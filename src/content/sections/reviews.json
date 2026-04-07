@@ -1,0 +1,10 @@
+{
+  "label": "Ils témoignent",
+  "title": "Ce que nos hôtes en disent",
+  "subtitle": "#1 des chambres d'hôtes à La Lande-de-Goult sur TripAdvisor — Note de 5/5",
+  "items": [
+    { "text": "Un lieu magique, hors du temps. On a tout aimé : la cabane, le bain nordique, le petit-déjeuner avec les produits du jardin. Coco est d'une gentillesse rare.", "author": "Un voyageur TripAdvisor", "rating": 5 },
+    { "text": "Un vrai cocon au milieu de la nature. La chambre était parfaite, l'atelier de céramique une belle découverte. On reviendra, c'est certain !", "author": "Un voyageur TripAdvisor", "rating": 5 },
+    { "text": "Parfait pour une escapade en famille. Les enfants ont adoré la chambre Larguez les Amarres, et nous le spa privatif. Un endroit unique en Normandie.", "author": "Un voyageur TripAdvisor", "rating": 5 }
+  ]
+}
