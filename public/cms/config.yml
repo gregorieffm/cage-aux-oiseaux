@@ -118,6 +118,23 @@ collections:
           - { label: Email, name: email, widget: string, required: false }
           - { label: "Lien Facebook", name: facebook, widget: string, required: false }
 
+      - name: gites
+        label: "Gîtes ailleurs en France"
+        file: src/content/sections/gites.json
+        fields:
+          - { label: Label, name: label, widget: string }
+          - { label: Titre, name: title, widget: string }
+          - label: Gîtes
+            name: items
+            widget: list
+            fields:
+              - { label: Nom, name: name, widget: string }
+              - { label: Localisation, name: location, widget: string }
+              - { label: Type, name: type, widget: string, hint: "Ex: Maison 8 personnes, Appartement 6 personnes..." }
+              - { label: Description, name: description, widget: text }
+              - { label: Photo, name: image, widget: image, required: false }
+              - { label: "Lien externe", name: url, widget: string, required: false, hint: "URL vers le site de réservation" }
+
       - name: location
         label: "Localisation"
         file: src/content/sections/location.json
