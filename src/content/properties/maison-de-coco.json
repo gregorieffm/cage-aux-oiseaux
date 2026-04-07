@@ -4,6 +4,7 @@
   "order": 10,
   "category": "gite",
   "featured": false,
+  "badge": "",
   "capacity": "8 personnes",
   "description": "Une maison de caractère dans le Parc naturel des Volcans d'Auvergne — 3 chambres, 120 m², terrasse, jardin. Idéale pour les séjours en famille ou entre amis.",
   "features": [
@@ -14,10 +15,18 @@
     "Animaux acceptés"
   ],
   "price": "131 €",
-  "image": "/images/property/gite-maison-ext.jpg",
-  "gallery": [],
+  "image": "/images/ap8fircdksofhi2ufxqs.webp",
+  "gallery": [
+    "/images/lyezlyzn6kyfvhgivzzy.webp"
+  ],
   "icalFeeds": [],
   "seasonalPricing": [
-    { "label": "Toute l'année", "startMonth": 1, "endMonth": 12, "pricePerNight": 131, "minNights": 2 }
+    {
+      "label": "Toute l'année",
+      "startMonth": 1,
+      "endMonth": 12,
+      "pricePerNight": 131,
+      "minNights": 2
+    }
   ]
 }
