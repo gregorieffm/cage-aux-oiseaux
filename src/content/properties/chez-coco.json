@@ -4,6 +4,7 @@
   "order": 13,
   "category": "gite",
   "featured": false,
+  "badge": "",
   "capacity": "2 personnes",
   "description": "Un studio cosy de 27 m² à Royat, près de la station thermale et du centre Royatonic — parfait pour un séjour bien-être en duo au cœur de l'Auvergne.",
   "features": [
@@ -14,10 +15,18 @@
     "WiFi gratuit"
   ],
   "price": "50 €",
-  "image": "",
-  "gallery": [],
+  "image": "/images/r18pvbcksby9cz1ms2l4.webp",
+  "gallery": [
+    "/images/r18pvbcksby9cz1ms2l4.webp"
+  ],
   "icalFeeds": [],
   "seasonalPricing": [
-    { "label": "Toute l'année", "startMonth": 1, "endMonth": 12, "pricePerNight": 50, "minNights": 1 }
+    {
+      "label": "Toute l'année",
+      "startMonth": 1,
+      "endMonth": 12,
+      "pricePerNight": 50,
+      "minNights": 1
+    }
   ]
 }
