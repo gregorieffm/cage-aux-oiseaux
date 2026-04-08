@@ -96,7 +96,7 @@ async function syncFeed(feed: IcalFeed): Promise<SyncResult> {
 
     result.success = true;
   } catch (err) {
-    const errorMsg = err instanceof Error ? err.message : String(err);
+    const errorMsg = err instanceof Error ? err.message : JSON.stringify(err);
     result.error = errorMsg;
 
     if (supabaseAdmin) {
