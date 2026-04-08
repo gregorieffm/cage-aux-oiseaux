@@ -1,3 +1,33 @@
+---
+import { getEntry } from 'astro:content';
+
+const v = async (name: string) => {
+  try {
+    const { data } = await getEntry('sections', name);
+    return data?.visible !== false;
+  } catch { return true; }
+};
+
+const show = {
+  domaine: await v('domaine'),
+  spa: await v('spa'),
+  atelier: await v('atelier'),
+  stages: await v('stages'),
+  gites: await v('gites'),
+};
+
+const allNavLinks = [
+  { href: '/#domaine', label: 'Le Domaine', key: 'domaine' },
+  { href: '/#hebergements', label: 'Hébergements', key: null },
+  { href: '/#spa', label: 'Bien-être', key: 'spa' },
+  { href: '/#atelier', label: 'Atelier & Galerie', key: 'atelier' },
+  { href: '/#stages', label: 'Stages céramique', key: 'stages' },
+  { href: '/#gites', label: 'Les Gîtes', key: 'gites' },
+];
+
+const navLinks = allNavLinks.filter(l => !l.key || show[l.key as keyof typeof show] !== false);
+---
+
 <footer class="footer">
   <div class="container">
     <div class="footer__grid">
@@ -13,17 +43,15 @@
       <div class="footer__col">
         <h4>Navigation</h4>
         <ul>
-          <li><a href="#domaine">Le Domaine</a></li>
-          <li><a href="#hebergements">Hébergements</a></li>
-          <li><a href="#spa">Bien-être</a></li>
-          <li><a href="#atelier">Atelier & Galerie</a></li>
-          <li><a href="#stages">Stages céramique</a></li>
+          {navLinks.map(l => (
+            <li><a href={l.href}>{l.label}</a></li>
+          ))}
         </ul>
       </div>
       <div class="footer__col">
         <h4>Contact</h4>
         <p>
-          La Perdrière<br />
+          2 Chemin des Fleurs<br />
           61320 La Lande-de-Goult<br />
           Orne, Normandie
         </p>

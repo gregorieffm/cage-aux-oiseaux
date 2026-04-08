@@ -1,24 +1,44 @@
 ---
+import { getEntry } from 'astro:content';
+
 interface Props {
   show?: Record<string, boolean>;
 }
-const { show = {} } = Astro.props;
+const { show: showProp } = Astro.props;
+
+const isHome = Astro.url.pathname === '/';
+const prefix = isHome ? '' : '/';
+
+async function getVisibility() {
+  if (showProp) return showProp;
+  const sections = ['domaine', 'spa', 'atelier', 'stages', 'gites', 'reviews', 'contact', 'location'];
+  const result: Record<string, boolean> = {};
+  for (const s of sections) {
+    try {
+      const { data } = await getEntry('sections', s);
+      result[s] = data?.visible !== false;
+    } catch { result[s] = true; }
+  }
+  return result;
+}
+
+const show = await getVisibility();
 
 const allLinks = [
-  { href: '#domaine', label: 'Le Domaine', key: 'domaine' },
-  { href: '#hebergements', label: 'Hébergements', key: null },
-  { href: '#spa', label: 'Bien-être', key: 'spa' },
-  { href: '#tarifs', label: 'Options', key: null },
-  { href: '#atelier', label: 'Atelier & Galerie', key: 'atelier' },
-  { href: '#stages', label: 'Stages', key: 'stages' },
-  { href: '#gites', label: 'Les Gîtes', key: 'gites' },
+  { href: `${prefix}#domaine`, label: 'Le Domaine', key: 'domaine' },
+  { href: `${prefix}#hebergements`, label: 'Hébergements', key: null },
+  { href: `${prefix}#spa`, label: 'Bien-être', key: 'spa' },
+  { href: `${prefix}#tarifs`, label: 'Options', key: null },
+  { href: `${prefix}#atelier`, label: 'Atelier & Galerie', key: 'atelier' },
+  { href: `${prefix}#stages`, label: 'Stages', key: 'stages' },
+  { href: `${prefix}#gites`, label: 'Les Gîtes', key: 'gites' },
 ];
 
 const links = allLinks.filter(l => !l.key || show[l.key] !== false);
 ---
 
 <nav class="nav" id="nav">
-  <a href="#hero" class="nav__logo">La Cage aux Oiseaux</a>
+  <a href={isHome ? '#hero' : '/'} class="nav__logo">La Cage aux Oiseaux</a>
   <button class="nav__toggle" id="navToggle" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -26,7 +46,7 @@ const links = allLinks.filter(l => !l.key || show[l.key] !== false);
     {links.map(link => (
       <li><a href={link.href}>{link.label}</a></li>
     ))}
-    <li><a href="#contact" class="nav__cta">Réserver</a></li>
+    <li><a href={`${prefix}#contact`} class="nav__cta">Réserver</a></li>
   </ul>
 </nav>
 
