@@ -1,11 +1,17 @@
 import type { APIRoute } from 'astro';
 import { syncAllFeeds, syncPropertyFeeds } from '../../lib/ical-sync';
 
-export const GET: APIRoute = async ({ url }) => {
-  const authHeader = url.searchParams.get('key');
+export const GET: APIRoute = async ({ url, request }) => {
+  const queryKey = url.searchParams.get('key');
+  const cronSecret = request.headers.get('authorization')?.replace('Bearer ', '');
   const expectedKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY;
+  const vercelCronSecret = import.meta.env.CRON_SECRET;
 
-  if (!authHeader || authHeader !== expectedKey) {
+  const isAuthorized =
+    (queryKey && queryKey === expectedKey) ||
+    (cronSecret && vercelCronSecret && cronSecret === vercelCronSecret);
+
+  if (!isAuthorized) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },
