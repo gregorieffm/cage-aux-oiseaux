@@ -64,19 +64,28 @@ async function syncFeed(feed: IcalFeed): Promise<SyncResult> {
       .map(([, id]) => id);
 
     if (toAdd.length > 0) {
-      const { error: insertError } = await supabaseAdmin
-        .from('blocked_dates')
-        .upsert(
-          toAdd.map(d => ({
-            property_id: feed.property_id,
-            date: d.date,
-            source: feed.platform,
-            external_uid: d.uid,
-          })),
-          { onConflict: 'property_id,date,source' }
-        );
-      if (insertError) throw insertError;
-      result.datesAdded = toAdd.length;
+      const uniqueToAdd = new Map<string, typeof toAdd[0]>();
+      for (const d of toAdd) {
+        uniqueToAdd.set(`${d.date}`, d);
+      }
+      const deduped = [...uniqueToAdd.values()];
+
+      for (let i = 0; i < deduped.length; i += 50) {
+        const batch = deduped.slice(i, i + 50);
+        const { error: insertError } = await supabaseAdmin
+          .from('blocked_dates')
+          .upsert(
+            batch.map(d => ({
+              property_id: feed.property_id,
+              date: d.date,
+              source: feed.platform,
+              external_uid: d.uid,
+            })),
+            { onConflict: 'property_id,date,source' }
+          );
+        if (insertError) throw insertError;
+      }
+      result.datesAdded = deduped.length;
     }
 
     if (toRemoveIds.length > 0) {
