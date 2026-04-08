@@ -377,7 +377,7 @@ const p = property.data;
   }
   .legend-dot--available { background: var(--c-green); }
   .legend-dot--blocked { background: var(--c-cream); }
-  .legend-dot--selected { background: #2e7d32; }
+  .legend-dot--selected { background: #3b82f6; }
 
   /* Sidebar */
   .booking-card {
@@ -745,17 +745,18 @@ const p = property.data;
   }
   .cal-day--checkin,
   .cal-day--checkout {
-    background: #2e7d32 !important;
+    background: var(--c-accent) !important;
     color: white !important;
     font-weight: 700;
-    box-shadow: 0 2px 6px rgba(46,125,50,.3);
+    box-shadow: 0 2px 6px rgba(139,111,78,.3);
   }
   .cal-day--checkin .cal-day__price,
   .cal-day--checkout .cal-day__price { color: rgba(255,255,255,.9); }
   .cal-day--range {
-    background: rgba(46,125,50,.15) !important;
-    color: #2e7d32 !important;
+    background: #3b82f6 !important;
+    color: white !important;
     font-weight: 600;
+    border-radius: var(--radius-sm);
   }
   .cal-day__num {
     font-size: var(--fs-sm);
