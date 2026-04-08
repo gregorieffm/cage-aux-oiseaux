@@ -212,13 +212,16 @@ import Footer from '../../components/Footer.astro';
       paymentStatus.className = `confirmation-status ${statusInfo.className}`;
       paymentStatus.style.display = '';
 
+      const rowStyle = 'display:flex;justify-content:space-between;padding:0.4em 0;font-size:14px';
+      const labelStyle = 'color:#7a756e';
+      const valueStyle = 'font-weight:500';
       details.innerHTML = `
-        <div class="row"><span>Hébergement</span><strong>${booking.property_name || '—'}</strong></div>
-        <div class="row"><span>Arrivée</span><strong>${checkIn}</strong></div>
-        <div class="row"><span>Départ</span><strong>${checkOut}</strong></div>
-        <div class="row"><span>Nuits</span><strong>${nights}</strong></div>
-        <hr/>
-        <div class="row"><span>Total</span><strong>${(booking.total_cents / 100).toFixed(0)} €</strong></div>
+        <div style="${rowStyle}"><span style="${labelStyle}">Hébergement</span><strong style="${valueStyle}">${booking.property_name || '—'}</strong></div>
+        <div style="${rowStyle}"><span style="${labelStyle}">Arrivée</span><strong style="${valueStyle}">${checkIn}</strong></div>
+        <div style="${rowStyle}"><span style="${labelStyle}">Départ</span><strong style="${valueStyle}">${checkOut}</strong></div>
+        <div style="${rowStyle}"><span style="${labelStyle}">Nuits</span><strong style="${valueStyle}">${nights}</strong></div>
+        <hr style="border:none;border-top:1px solid #ece6db;margin:4px 0"/>
+        <div style="${rowStyle}"><span style="${labelStyle}">Total</span><strong style="font-weight:600;font-size:18px">${(booking.total_cents / 100).toFixed(0)} €</strong></div>
       `;
 
       loader.style.display = 'none';
