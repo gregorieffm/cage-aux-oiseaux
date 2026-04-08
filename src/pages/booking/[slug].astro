@@ -176,9 +176,13 @@ const p = property.data;
 
   .booking-layout {
     display: grid;
-    grid-template-columns: 1fr 400px;
+    grid-template-columns: 1fr 420px;
     gap: var(--space-xl);
     align-items: start;
+  }
+  .booking-sidebar {
+    position: sticky;
+    top: 90px;
   }
 
   .booking-hero { margin-bottom: var(--space-lg); border-radius: var(--radius-lg); overflow: hidden; }
@@ -377,8 +381,6 @@ const p = property.data;
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
     box-shadow: var(--shadow-md);
-    position: sticky;
-    top: 100px;
   }
   .booking-card h3 {
     font-family: var(--ff-display);
@@ -448,7 +450,7 @@ const p = property.data;
       gap: var(--space-lg);
     }
     .booking-main, .booking-sidebar { max-width: 100%; }
-    .booking-card { position: static; }
+    .booking-sidebar { position: static; }
     .booking-title { font-size: var(--fs-xl); text-align: center; }
     .booking-capacity { justify-content: center; }
     .booking-desc { text-align: center; }
