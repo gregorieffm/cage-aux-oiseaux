@@ -168,11 +168,15 @@ const p = property.data;
     align-items: center;
     gap: 0.5em;
     font-size: var(--fs-sm);
-    color: var(--c-accent);
+    font-weight: 500;
+    color: var(--c-white);
+    background: var(--c-accent);
+    padding: 0.5em 1.2em;
+    border-radius: var(--radius-xl);
     margin-bottom: var(--space-lg);
     transition: var(--transition);
   }
-  .booking-back:hover { color: var(--c-accent-dark); }
+  .booking-back:hover { background: var(--c-accent-dark); color: var(--c-white); }
 
   .booking-layout {
     display: grid;
