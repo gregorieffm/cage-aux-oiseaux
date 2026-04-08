@@ -72,8 +72,12 @@ const p = property.data;
             {p.features.map(f => <li>{f}</li>)}
           </ul>
 
-          <h2 class="booking-section-title">Choisissez vos dates</h2>
+        </div>
+
+        <!-- Right: Calendar + Booking summary + Form -->
+        <aside class="booking-sidebar">
           <div class="calendar" id="calendar" data-property={p.slug}>
+            <h3 class="calendar__title">Choisissez vos dates</h3>
             <div class="calendar__nav">
               <button class="calendar__arrow" id="prevMonth" aria-label="Mois précédent">&larr;</button>
               <span class="calendar__month" id="monthLabel"></span>
@@ -95,10 +99,7 @@ const p = property.data;
               <span><span class="legend-dot legend-dot--selected"></span> Sélectionné</span>
             </div>
           </div>
-        </div>
 
-        <!-- Right: Booking summary + Form -->
-        <aside class="booking-sidebar">
           <div class="booking-card" id="bookingCard">
             <h3>Réservez votre expérience</h3>
 
@@ -306,8 +307,15 @@ const p = property.data;
   .calendar {
     background: var(--c-white);
     border-radius: var(--radius-lg);
-    padding: var(--space-lg);
+    padding: var(--space-md);
     box-shadow: var(--shadow-md);
+    margin-bottom: var(--space-md);
+  }
+  .calendar__title {
+    font-family: var(--ff-display);
+    font-size: var(--fs-lg);
+    font-weight: 400;
+    margin-bottom: var(--space-sm);
   }
   .calendar__nav {
     display: flex;
@@ -445,7 +453,7 @@ const p = property.data;
     .booking-capacity { justify-content: center; }
     .booking-desc { text-align: center; }
     .booking-features { justify-content: center; }
-    .booking-section-title { text-align: center; }
+    .calendar__title { text-align: center; }
     .gallery__main { aspect-ratio: 4/3; }
     .gallery__thumbs { justify-content: center; }
   }
@@ -704,11 +712,11 @@ const p = property.data;
     display: contents;
   }
   .cal-day {
-    aspect-ratio: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 6px 2px;
     border-radius: var(--radius-sm);
     cursor: default;
     transition: var(--transition);
