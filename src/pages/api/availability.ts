@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import { getAvailability } from '../../lib/availability';
-import { supabase } from '../../lib/supabase';
+import { supabase, supabaseAdmin } from '../../lib/supabase';
+
+const db = supabaseAdmin || supabase;
 
 export const GET: APIRoute = async ({ url }) => {
   const propertyId = url.searchParams.get('property');
@@ -15,7 +17,7 @@ export const GET: APIRoute = async ({ url }) => {
   }
 
   try {
-    const { data: property, error } = await supabase
+    const { data: property, error } = await db
       .from('properties')
       .select('base_price_cents')
       .eq('id', propertyId)

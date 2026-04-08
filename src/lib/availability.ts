@@ -1,4 +1,6 @@
-import { supabase } from './supabase';
+import { supabase, supabaseAdmin } from './supabase';
+
+const db = supabaseAdmin || supabase;
 import type { SeasonalPricing } from './database.types';
 
 export interface DateAvailability {
@@ -16,7 +18,7 @@ export async function getBlockedDates(
   from: string,
   to: string
 ): Promise<Set<string>> {
-  const { data, error } = await supabase
+  const { data, error } = await db
     .from('blocked_dates')
     .select('date')
     .eq('property_id', propertyId)
@@ -35,7 +37,7 @@ export async function getBookedDates(
   from: string,
   to: string
 ): Promise<Set<string>> {
-  const { data, error } = await supabase
+  const { data, error } = await db
     .from('bookings')
     .select('check_in, check_out')
     .eq('property_id', propertyId)
@@ -62,7 +64,7 @@ export async function getBookedDates(
 export async function getSeasonalPricing(
   propertyId: string
 ): Promise<SeasonalPricing[]> {
-  const { data, error } = await supabase
+  const { data, error } = await db
     .from('seasonal_pricing')
     .select('*')
     .eq('property_id', propertyId);
